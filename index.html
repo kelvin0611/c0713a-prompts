@@ -15,7 +15,7 @@
          font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
          line-height: 1.65; padding: 26px 16px 50px; }
 
-  .hero { text-align: center; margin-bottom: 26px; }
+  .hero { text-align: center; margin-bottom: 24px; }
   .badge { display: inline-block; background: var(--accent); color: #fff;
            font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
            padding: 4px 11px; border-radius: 6px; margin-bottom: 14px; }
@@ -28,25 +28,30 @@
            padding: 14px 16px; margin: 22px 0; font-size: 15px; }
   .pitch b { color: #fff; }
 
-  h2 { font-size: 15px; color: var(--muted); font-weight: 700; letter-spacing: .04em;
-       margin: 26px 0 10px; text-transform: uppercase; }
+  h2 { font-size: 14px; color: var(--muted); font-weight: 700; letter-spacing: .06em;
+       margin: 28px 0 10px; text-transform: uppercase; }
 
-  .road { display: flex; flex-direction: column; gap: 10px; }
-  .step { display: flex; gap: 12px; background: var(--card);
-          border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; }
-  .step .n { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
-             background: var(--card2); color: #fff; font-weight: 800; font-size: 14px;
-             display: flex; align-items: center; justify-content: center; }
-  .step.done .n { background: var(--blue); }
-  .step .t { flex: 1; }
-  .step .t b { display: block; font-size: 15.5px; }
-  .step .t span { color: var(--muted); font-size: 13.5px; }
+  /* ── 課程目錄 ── */
+  .lesson { background: var(--card); border: 1px solid var(--border);
+            border-radius: 13px; overflow: hidden; margin-bottom: 11px; }
+  .lesson > .head { padding: 12px 15px 10px; border-bottom: 1px solid var(--border); }
+  .lesson > .head b { font-size: 16px; }
+  .lesson > .head span { display: block; color: var(--muted); font-size: 12.5px; }
+  .lesson.soon { opacity: .45; }
+  a.row { display: flex; align-items: center; gap: 11px; padding: 12px 15px;
+          text-decoration: none; color: var(--fg); border-top: 1px solid #222731; }
+  a.row:first-child { border-top: 0; }
+  a.row .ico { font-size: 17px; width: 22px; text-align: center; flex: 0 0 auto; }
+  a.row .tx { flex: 1; }
+  a.row .tx b { display: block; font-size: 14.5px; font-weight: 600; }
+  a.row .tx span { color: var(--muted); font-size: 12px; }
+  a.row .go { color: var(--muted); font-size: 15px; }
 
   a.cta { display: block; text-align: center; background: var(--accent); color: #fff;
           text-decoration: none; font-weight: 800; font-size: 18px;
-          padding: 16px; border-radius: 12px; margin: 26px 0 10px; }
+          padding: 16px; border-radius: 12px; margin: 22px 0 8px; }
   a.cta:active { transform: scale(.985); }
-  .txt2 { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 26px; }
+  .txt2 { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 6px; }
 
   .links { display: flex; flex-direction: column; gap: 9px; }
   a.lk { display: flex; align-items: center; gap: 11px; background: var(--card);
@@ -76,24 +81,51 @@
   你負責<b>諗</b>，AI 負責<b>寫</b>。
 </div>
 
-<h2>今日流程</h2>
-<div class="road">
-  <div class="step done">
-    <div class="n">1</div>
-    <div class="t"><b>入門</b><span>學識叫 AI 做嘢（4 小節 · 約 20 分鐘）</span></div>
+<h2>課程目錄</h2>
+
+<div class="lesson">
+  <div class="head">
+    <b>Lesson 1 · 整你嘅第一個 App</b>
+    <span>入門 → 開發 → 試玩　（今日）</span>
   </div>
-  <div class="step">
-    <div class="n">2</div>
-    <div class="t"><b>開發</b><span>5 個 Step，整出你嘅 app（約 45 分鐘）</span></div>
+  <a class="row" href="lesson1.html#intro">
+    <span class="ico">🔰</span>
+    <span class="tx"><b>入門：開始之前</b><span>4 小節 · 學識叫 AI 做嘢 · 約 20 分鐘</span></span>
+    <span class="go">›</span>
+  </a>
+  <a class="row" href="lesson1.html#develop">
+    <span class="ico">🛠️</span>
+    <span class="tx"><b>開發：5 個 Step</b><span>路線 → 站名 → 到站時間 → 港鐵 → 自動更新 · 約 45 分鐘</span></span>
+    <span class="go">›</span>
+  </a>
+  <a class="row" href="lesson1.html">
+    <span class="ico">📋</span>
+    <span class="tx"><b>全部 Prompt（一頁睇晒）</b><span>想一次過 copy 晒就用呢個</span></span>
+    <span class="go">›</span>
+  </a>
+</div>
+
+<div class="lesson soon">
+  <div class="head">
+    <b>Lesson 2 · 個人化</b>
+    <span>改成你自己嘅風格（未開始）</span>
   </div>
-  <div class="step">
-    <div class="n">3</div>
-    <div class="t"><b>試玩</b><span>玩自己整嘅嘢，玩同學嘅</span></div>
+</div>
+<div class="lesson soon">
+  <div class="head">
+    <b>Lesson 3 · 捉 AI 錯處</b>
+    <span>AI 會寫錯，你要捉到（未開始）</span>
+  </div>
+</div>
+<div class="lesson soon">
+  <div class="head">
+    <b>Lesson 4 · 發佈你嘅 App</b>
+    <span>上 GitHub，有自己嘅網址（未開始）</span>
   </div>
 </div>
 
-<a class="cta" href="lesson1.html">開始 Lesson 1 →</a>
-<div class="txt2">入面有全部 prompt，撳一下就複製得</div>
+<a class="cta" href="lesson1.html#intro">開始 Lesson 1 →</a>
+<div class="txt2">由「入門」開始，跟住做就得</div>
 
 <h2>其他資源</h2>
 <div class="links">
