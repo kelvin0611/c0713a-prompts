@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 · 個人化 — C0713A Prompt 卡</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 2 · 個人化</h1>
+<div class="sub">改成你自己嘅風格　·　嶺南衡怡紀念中學　·　按「複製」→ 貼落 Cursor</div>
+
+<div class="howto">
+  <b>點用呢張卡？</b>
+  <ol>
+    <li>開 <b>Cursor</b>，打開你上次 Lesson 1 嘅專案資料夾</li>
+    <li>右邊 Chat 面板，左下角揀 <b>Agent</b> 模式</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b></li>
+    <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
+    <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
+  </ol>
+</div>
+
+<!-- ============ 熱身 ============ -->
+<div class="parthead" id="warmup">
+  <span class="tagline">PART 0</span>
+  <h2>熱身：回顧上一堂</h2>
+  <p>先確認你嘅 App 仲跑得起。跑得到，先至有嘢可以個人化。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">0</span>個 App 仲在生嗎？</h2>
+  <div class="goal">先叫 AI 講返你上次整咗咩，順便確認檔案冇爛</div>
+  <pre id="t1">我想繼續做上次嘅交通 App。請你睇下 @index.html、@app.js 同 @style.css，用中文話畀我知：
+1. 而家個 app 有咩功能？（路線、站名、到站時間、港鐵、自動更新？）
+2. 邊個 function 負責邊部分？
+3. 有冇邊度壞咗、或者寫得唔完整？
+唔好改任何嘢，我淨係想知。</pre>
+  <button class="copy" data-t="t1">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>AI 答得出你有齊 5 個功能，同埋每個 function 嘅用途。<br>
+    <b>如果 AI 話「我睇唔到檔案」</b> → Cursor 開錯資料夾，關咗佢重新開一次。<br>
+    <b>如果佢話你冇某個檔案</b> → 唔緊要，你上次可能擺咗所有嘢落 <code>index.html</code>，
+    照同佢講「我冇 <code>style.css</code>，CSS 寫喺 <code>index.html</code> 嘅 <code>&lt;style&gt;</code> 裡面」。
+  </div>
+</div>
+
+<!-- ============ 個人化任務 ============ -->
+<div class="parthead" id="tasks">
+  <span class="tagline">PART 1</span>
+  <h2>個人化任務</h2>
+  <p>5 個任務，做完你嘅 App 就唔再同隔籬位一樣。跟住做，每個做完都撳 Keep All ＋ 重新整理。</p>
+</div>
+
+<!-- 任務 1 -->
+<div class="step">
+  <h2><span class="num">1</span>換主題色</h2>
+  <div class="goal">目標：由黑色紅色變成你自己揀嘅配色</div>
+  <pre id="t2">請幫我改 @index.html 嘅主題顏色（或者 @style.css，如果你有呢個檔）。
+
+而家嘅顏色係寫喺 :root 裡面嘅 CSS 變數：
+  --bg（背景）、--card（卡片底）、--accent（按鈕主色）、--fg（文字色）
+
+我想改成呢幾隻色：
+  背景（--bg） = （填你想要嘅顏色，例如「深藍色」）
+  卡片（--card） = （例如「淺一級嘅深藍」）
+  按鈕（--accent） = （例如「橙黃色」）
+
+要求：
+- 只改 :root 呢幾個變數嘅值，唔准喺其他地方寫死顏色（唔准出現 #xxxxxx 直接寫喺 selector）
+- 所有顏色一律要經 var(--xxx) 取，咁以後改一隻色就全部跟住變
+- 文字要睇得清（對比要夠），唔好淺色字配淺色底
+- 其他版面、功能一律唔好郁</pre>
+  <button class="copy" data-t="t2">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>重新整理之後，背景、卡片、按鈕全部換成你揀嘅色，但排版一模一樣。<br>
+    <b>點知佢有冇寫死顏色？</b>喺 Cursor 搜尋 <code>#</code>，如果你揀嘅色只出現喺 <code>:root</code> 一段，
+    咁就啱。想再玩 → 再叫佢「換第 2 套色，一樣只改 :root」。
+  </div>
+  <div class="warn">⚠️ 唔好淨係叫「整靚啲」。要<b>講明改邊幾個變數、改成咩色</b>，AI 才會做你想嘅嘢。</div>
+</div>
+
+<!-- 任務 2 -->
+<div class="step">
+  <h2><span class="num">2</span>改 App 名 ＋ emoji</h2>
+  <div class="goal">目標：個標題寫住你嘅名，仲有你自己揀嘅 emoji</div>
+  <pre id="t3">請改 @index.html 嘅標題部分。
+
+1. 將 &lt;h1&gt; 嘅文字改成：（寫你嘅名）嘅交通 App
+2. 標題前面加一個 emoji：（填你想要嘅 emoji，例如 🚌、🚇、🏠、⚡）
+3. 順手改埋 &lt;title&gt; 標籤嘅文字（即係瀏覽器分頁上面顯示嘅字），同 h1 一致
+4. 副標題／說明文字如果仲寫住「香港交通到站 App」，都改埋做你嘅版本
+
+嚴格要求：
+- 只准改標題相關嘅文字，其他一律唔好郁
+- 唔好改 CSS、唔好改 JavaScript、唔好改任何 id 同 class 名
+- 唔好加任何新嘅 &lt;style&gt; 或 &lt;script&gt;</pre>
+  <button class="copy" data-t="t3">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>個 App 頂頭變成「🚌 阿明嘅交通 App」，瀏覽器分頁名都跟住變。<br>
+    <b>想更型？</b>再叫佢「幫我加一句 tagline 喺標題下面，語氣似中學生，一串字內」。
+  </div>
+</div>
+
+<!-- 任務 3 -->
+<div class="step">
+  <h2><span class="num">3</span>加「我屋企」掣</h2>
+  <div class="goal">目標：撳一下，就知你屋企附近有咩巴士站</div>
+  <pre id="t4">請幫我加一個新功能：「搵我附近嘅巴士站」。
+
+做法：
+1. 喺 @index.html 加一個按鈕，文字係「📍 我附近嘅站」，id="btn-nearby"
+2. 撳咗之後用 navigator.geolocation.getCurrentPosition() 攞用戶位置
+3. 攞到之後，去呢個網址攞一次全港巴士站資料：
+   https://data.etabus.gov.hk/v1/transport/kmb/stop/
+   回應格式係 { data: [ { stop, name_tc, lat, long }, ... ] }
+   ⚠️ 呢個回應裡面每個站都已經有 lat 同 long，所以只可以 fetch 一次，
+   絕對唔可以逐個站再 fetch 一次（792 個站逐個 fetch 會慢到死）
+4. 用 Haversine 公式計每個站同你嘅距離，排序，取最近嘅 5 個
+5. 結果放入 id="nearby-list"，每個顯示：「站名　約 120 米」
+6. 距離用米顯示，唔好顯示一大堆小數位
+
+⚠️ 最重要嘅一點：如果用戶拒絕分享位置（或者瀏覽器唔支援），
+唔准出紅色 error、唔准令畫面爛。
+要喺 id="nearby-list" 顯示一句友善嘅中文提示，例如：
+「分享唔到位置，唔緊要 —— 你照樣可以喺上面撳路線號碼㨂站 🙂」
+所有 fetch 都要用 try / catch 包住，失敗就出友善訊息。</pre>
+  <button class="copy" data-t="t4">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>撳個掣 → 瀏覽器問你俾唔俾位置 → 俾就出最近 5 個站同距離。<br>
+    <b>一定要試埋「拒絕」：</b>重新整理，撳個掣，然後揀 <b>「不允許」</b> ——
+    應該出一句友善中文，<b>唔係</b>紅色 error，個 app 亦都仲用得。
+  </div>
+  <div class="warn">⚠️ 呢個任務嘅重點唔係「搵到最近嘅站」，而係<b>用戶唔俾權限嗰陣，你嘅程式唔會死</b>。</div>
+</div>
+
+<!-- 任務 4 -->
+<div class="step">
+  <h2><span class="num">4</span>收藏路線（記得住）</h2>
+  <div class="goal">目標：收藏咗嘅路線，關咗個 app 再開都仲在</div>
+  <pre id="t5">請幫我加「收藏路線」功能。
+
+1. 每條路線掣旁邊加一粒細細嘅星 ⭐（或者 ❤️），撳佢就收藏／取消收藏
+2. 收藏咗嘅路線，掣上面要有個標記（例如變色或者加實心星）
+3. 收藏清單要顯示喺頁面頂，id="fav-list"，每條都可以撳（撳咗就同撳路線掣一樣）
+4. 用 localStorage 儲存，key 一定係：my-fav-routes
+   - 存嘅時候用 JSON.stringify()，讀嘅時候用 JSON.parse()
+   - 頁面一載入就要即刻讀返出嚟，唔可以等到用戶撳嘢才讀
+   - 讀嘅時候要 try / catch，如果 localStorage 壞咗或者係舊格式，
+     就當佢係空清單，唔可以令成個 app 死
+
+⚠️ 一定要真係寫入 localStorage。
+唔准淨係存喺 JavaScript 變數或者記憶體 —— 咁樣重新整理之後就會唔見晒。
+
+另外：其他 fetch 失敗嘅時候，唔好影響收藏清單顯示。</pre>
+  <button class="copy" data-t="t5">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>收藏 1A、5C → 按 <code>F5</code> 重新整理 → 兩條線仲喺收藏清單。<br>
+    <b>自己驗證：</b>按 <code>F12</code> → <b>Application</b> → <b>Local Storage</b> →
+    應該見到一個叫 <code>my-fav-routes</code> 嘅 key，內容係 <code>["1A","5C"]</code> 咁樣。
+  </div>
+  <div class="warn">⚠️ 如果重新整理之後唔見咗，即係 AI 只係存喺記憶體。同佢講：「<b>你用咗 localStorage 未？key 要係 my-fav-routes，重新整理之後一定要還在。</b>」</div>
+</div>
+
+<!-- 任務 5 -->
+<div class="step">
+  <h2><span class="num">5</span>深色／淺色切換</h2>
+  <div class="goal">目標：一粒掣切換日／夜模式，仲要記得你揀咗邊個</div>
+  <pre id="t6">請幫我加「深色／淺色模式」切換。
+
+1. 頁面右上角加一粒掣，id="btn-theme"，文字係「🌙 夜間」／「☀️ 日間」
+2. 用 CSS 變數做，唔准寫死顏色：
+   - 喺 :root 定義深色一組（--bg、--card、--card2、--fg、--muted、--border）
+   - 再定義淺色一組
+   - 整個網站所有顏色都要經 var(--xxx) 取
+3. 切換嘅方法：喺 &lt;html&gt; 或 &lt;body&gt; 加／除一個 class（例如 .light），
+   由 CSS 決定淺色嘅變數值。唔好用 JavaScript 逐個元素改 style。
+4. 記住用戶揀咗邊個：用 localStorage，key 係 my-theme，
+   值係 "dark" 或者 "light"
+5. 頁面一載入就要即刻套用返上次揀嘅（唔可以閃一下先變）。
+6. 預設（第一次開）用深色。
+
+⚠️ 淺色模式都要睇得清：深色文字配淺色底，唔好留低白色字配白底。
+所有 fetch 邏輯、收藏功能一律唔好郁。</pre>
+  <button class="copy" data-t="t6">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>撳個掣 → 成個網站由深色變淺色，文字仲睇得清；
+    重新整理之後仍然係你上次揀嘅模式。<br>
+    <b>自己驗證：</b><code>F12</code> → <b>Application</b> → <b>Local Storage</b> →
+    見到 <code>my-theme</code> = <code>light</code> 或 <code>dark</code>。
+  </div>
+  <div class="warn">⚠️ 見到「閃一下」先變色，即係順序寫錯。同 AI 講：「<b>主題套用要喺頁面渲染之前做，唔可以等 DOMContentLoaded。</b>」</div>
+</div>
+
+<!-- DEBUG -->
+<div class="step">
+  <h2><span class="num">?</span>壞咗點算？</h2>
+  <div class="goal">唔好慌，把錯誤「交畀」AI</div>
+  <pre id="t7">我頭先改完之後出現咗問題：
+[喺呢度貼上錯誤訊息，或者描述你見到嘅嘢]
+畫面／Console 顯示：
+[貼上紅字]
+請幫我搵出原因並修好，唔好改其他冇問題嘅部分。</pre>
+  <button class="copy" data-t="t7">複製</button>
+  <div class="expect">
+    <b>點搵錯誤訊息？</b>瀏覽器按 <code>F12</code> → 揀 <b>Console</b> → 見到紅色字就 copy 落嚟。<br>
+    <b>AI 改爛咗？</b>喺 Cursor 對話框同佢講：「<b>請還原上一步嘅改動</b>」。
+  </div>
+</div>
+
+<footer>
+  用政府開放數據（data.gov.hk）· 唔需要 API key · 資料來源：九巴、港鐵<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
