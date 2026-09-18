@@ -27,6 +27,21 @@
          width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
          align-items: center; justify-content: center; flex: 0 0 auto; }
   .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
   pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
         border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
         white-space: pre-wrap; word-break: break-word;
@@ -61,6 +76,93 @@
     <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
     <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
   </ol>
+</div>
+
+<!-- ============ 入門（開始之前） ============ -->
+<div class="parthead">
+  <span class="tagline">PART 0</span>
+  <h2>入門：開始之前</h2>
+  <p>未識做唔緊要。呢 4 小節由「AI 識唔識你個專案」開始，跟住做就得。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">A</span>AI 認得你個專案嗎？</h2>
+  <div class="goal">先確認 AI 睇得到你嘅檔案（呢個係之後所有嘢嘅基礎）</div>
+  <pre id="i1">我啱啱用 Cursor 開咗一個專案。請你睇下 @index.html 同 @app.js，用中文話畀我知：
+1. 呢個 app 係做咩嘅？
+2. app.js 裡面有幾個 function？每個負責咩？
+3. 邊幾個位係未填嘅（有 // TODO 嘅）？
+唔好改任何嘢，我淨係想知。</pre>
+  <button class="copy" data-t="i1">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>AI 答得出你個 app 有 5 個 function、邊幾個未填。<br>
+    <b>如果 AI 話「我睇唔到檔案」</b> → 你個 Cursor 開錯資料夾，重新開一次。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">B</span>點樣跑起個 app？</h2>
+  <div class="goal">唔識打命令唔緊要 —— 叫 AI 教你</div>
+  <pre id="i2">我想喺自己部電腦開呢個 app 睇下。請你一步一步教我：
+1. 要喺 Terminal 打咩命令？
+2. 之後喺瀏覽器打咩網址？
+3. 想停咗個 server 要點做？
+用最簡單嘅講法，我係中學生，未用過 Terminal。</pre>
+  <button class="copy" data-t="i2">複製</button>
+  <div class="expect">
+    <b>標準答案：</b>喺 Cursor 嘅 Terminal 打 <code>python3 -m http.server 8000</code>，
+    然後瀏覽器開 <code>http://localhost:8000</code>。停就按 <code>Ctrl + C</code>。<br>
+    ⚠️ <b>唔可以雙擊 index.html 開</b> —— 一定要用 local server，唔係會一片空白。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">C</span>第一次叫 AI 改嘢</h2>
+  <div class="goal">由最安全嘅改動開始 —— 只改一個標題，即刻有成功感</div>
+  <pre id="i3">請幫我改 @index.html 入面嘅 app 標題，
+改做「（寫你個名）嘅交通 App」。
+只改標題，其他嘢一律唔好郁。</pre>
+  <button class="copy" data-t="i3">複製</button>
+  <div class="expect">
+    <b>做完要記住兩步：</b>① 撳 Cursor 右上角 <b>「Keep All」</b> ② 回瀏覽器 <b>重新整理（F5）</b>。<br>
+    ⚠️ 呢兩步之後每一步都要做。唔撳 Keep All ＝ 你嘅改動冇儲存。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">D</span>問問題 ＆ 求救</h2>
+  <div class="goal">唔想改 code、淨係想問；或者壞咗要救 —— 兩種都有</div>
+
+  <p class="mini">D1 · 純問問題（用 Ask 模式，AI 唔會改你嘅 code）</p>
+  <pre id="i4">請用中學生聽得明嘅講法解釋：咩係 API？
+用一個日常例子（例如餐廳點菜）去解釋，唔好講技術名詞。</pre>
+  <button class="copy" data-t="i4">複製</button>
+
+  <p class="mini">D2 · 睇唔明一段 code</p>
+  <pre id="i5">我唔明呢段 code：
+[貼上你唔明嘅 code]
+請你逐行解釋，用最簡單嘅講法。唔好改任何嘢。</pre>
+  <button class="copy" data-t="i5">複製</button>
+
+  <p class="mini">D3 · 壞咗（出事嗰陣用呢個）</p>
+  <pre id="i6">我頭先改完之後出現咗問題：
+[描述你見到嘅嘢，例如：撳咗冇反應、畫面一片空白]
+Console 顯示：
+[按 F12 → Console → 貼上紅字]
+請幫我搵出原因並修好，唔好改其他冇問題嘅部分。</pre>
+  <button class="copy" data-t="i6">複製</button>
+
+  <div class="expect">
+    <b>點搵紅字？</b>瀏覽器按 <code>F12</code> → 揀 <b>Console</b> → 紅色嘅就 copy 落嚟。<br>
+    <b>AI 改爛咗？</b>同佢講：「<b>請還原上一步嘅改動</b>」。
+  </div>
+</div>
+
+<!-- ============ 第一部分 ============ -->
+<div class="parthead">
+  <span class="tagline">PART 1</span>
+  <h2>主線：整你嘅交通 App</h2>
+  <p>入門做完就由 Step 1 開始，一路做到 Step 5。</p>
 </div>
 
 <!-- STEP 1 -->
