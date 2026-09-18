@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C0713A Prompt 卡 — 香港交通 App</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 1 · Prompt 卡</h1>
+<div class="sub">香港交通到站 App　·　嶺南衡怡紀念中學　·　按「複製」→ 貼落 Cursor</div>
+
+<div class="howto">
+  <b>點用呢張卡？</b>
+  <ol>
+    <li>開 <b>Cursor</b>，打開你嘅專案資料夾</li>
+    <li>右邊 Chat 面板，左下角揀 <b>Agent</b> 模式</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b></li>
+    <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
+    <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
+  </ol>
+</div>
+
+<!-- ============ 入門（開始之前） ============ -->
+<div class="parthead">
+  <span class="tagline">PART 0</span>
+  <h2>入門：開始之前</h2>
+  <p>未識做唔緊要。呢 4 小節由「AI 識唔識你個專案」開始，跟住做就得。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">A</span>AI 認得你個專案嗎？</h2>
+  <div class="goal">先確認 AI 睇得到你嘅檔案（呢個係之後所有嘢嘅基礎）</div>
+  <pre id="i1">我啱啱用 Cursor 開咗一個專案。請你睇下 @index.html 同 @app.js，用中文話畀我知：
+1. 呢個 app 係做咩嘅？
+2. app.js 裡面有幾個 function？每個負責咩？
+3. 邊幾個位係未填嘅（有 // TODO 嘅）？
+唔好改任何嘢，我淨係想知。</pre>
+  <button class="copy" data-t="i1">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>AI 答得出你個 app 有 5 個 function、邊幾個未填。<br>
+    <b>如果 AI 話「我睇唔到檔案」</b> → 你個 Cursor 開錯資料夾，重新開一次。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">B</span>點樣跑起個 app？</h2>
+  <div class="goal">唔識打命令唔緊要 —— 叫 AI 教你</div>
+  <pre id="i2">我想喺自己部電腦開呢個 app 睇下。請你一步一步教我：
+1. 要喺 Terminal 打咩命令？
+2. 之後喺瀏覽器打咩網址？
+3. 想停咗個 server 要點做？
+用最簡單嘅講法，我係中學生，未用過 Terminal。</pre>
+  <button class="copy" data-t="i2">複製</button>
+  <div class="expect">
+    <b>標準答案：</b>喺 Cursor 嘅 Terminal 打 <code>python3 -m http.server 8000</code>，
+    然後瀏覽器開 <code>http://localhost:8000</code>。停就按 <code>Ctrl + C</code>。<br>
+    ⚠️ <b>唔可以雙擊 index.html 開</b> —— 一定要用 local server，唔係會一片空白。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">C</span>第一次叫 AI 改嘢</h2>
+  <div class="goal">由最安全嘅改動開始 —— 只改一個標題，即刻有成功感</div>
+  <pre id="i3">請幫我改 @index.html 入面嘅 app 標題，
+改做「（寫你個名）嘅交通 App」。
+只改標題，其他嘢一律唔好郁。</pre>
+  <button class="copy" data-t="i3">複製</button>
+  <div class="expect">
+    <b>做完要記住兩步：</b>① 撳 Cursor 右上角 <b>「Keep All」</b> ② 回瀏覽器 <b>重新整理（F5）</b>。<br>
+    ⚠️ 呢兩步之後每一步都要做。唔撳 Keep All ＝ 你嘅改動冇儲存。
+  </div>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">D</span>問問題 ＆ 求救</h2>
+  <div class="goal">唔想改 code、淨係想問；或者壞咗要救 —— 兩種都有</div>
+
+  <p class="mini">D1 · 純問問題（用 Ask 模式，AI 唔會改你嘅 code）</p>
+  <pre id="i4">請用中學生聽得明嘅講法解釋：咩係 API？
+用一個日常例子（例如餐廳點菜）去解釋，唔好講技術名詞。</pre>
+  <button class="copy" data-t="i4">複製</button>
+
+  <p class="mini">D2 · 睇唔明一段 code</p>
+  <pre id="i5">我唔明呢段 code：
+[貼上你唔明嘅 code]
+請你逐行解釋，用最簡單嘅講法。唔好改任何嘢。</pre>
+  <button class="copy" data-t="i5">複製</button>
+
+  <p class="mini">D3 · 壞咗（出事嗰陣用呢個）</p>
+  <pre id="i6">我頭先改完之後出現咗問題：
+[描述你見到嘅嘢，例如：撳咗冇反應、畫面一片空白]
+Console 顯示：
+[按 F12 → Console → 貼上紅字]
+請幫我搵出原因並修好，唔好改其他冇問題嘅部分。</pre>
+  <button class="copy" data-t="i6">複製</button>
+
+  <div class="expect">
+    <b>點搵紅字？</b>瀏覽器按 <code>F12</code> → 揀 <b>Console</b> → 紅色嘅就 copy 落嚟。<br>
+    <b>AI 改爛咗？</b>同佢講：「<b>請還原上一步嘅改動</b>」。
+  </div>
+</div>
+
+<!-- ============ 第一部分 ============ -->
+<div class="parthead">
+  <span class="tagline">PART 1</span>
+  <h2>主線：整你嘅交通 App</h2>
+  <p>入門做完就由 Step 1 開始，一路做到 Step 5。</p>
+</div>
+
+<!-- STEP 1 -->
+<div class="step">
+  <h2><span class="num">1</span>出路線掣</h2>
+  <div class="goal">目標：畫面出到 792 個九巴路線號碼掣</div>
+  <pre id="p1">請修改 @app.js 裡面嘅 loadRoutes() function：
+- 用 fetch 攞 https://data.etabus.gov.hk/v1/transport/kmb/route/
+- 回應係 { data: [ {route, bound, service_type}, ... ] }
+- 只要 service_type 係 1，同一條路線去重
+- 每條路線號碼做一個 button，放入 id="route-list"
+- 失敗就喺 id="error" 顯示錯誤</pre>
+  <button class="copy" data-t="p1">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>一大堆路線號碼掣（<code>1</code>、<code>10</code>、<code>101</code>、<code>1A</code>…）。
+    如果係空白，等 3 秒再撳「重新載入」。
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <h2><span class="num">2</span>撳路線見站名</h2>
+  <div class="goal">目標：撳 <code>1A</code> → 出 35 個真站名（中秀茂坪 → 尖沙咀碼頭）</div>
+  <pre id="p2">請修改 @app.js 裡面嘅 loadStops() function：
+- 撳路線掣之後，去 https://data.etabus.gov.hk/v1/transport/kmb/route-stop/{路線}/outbound/1
+  （{路線} 換成學生㩒嘅號碼，例如 1A）
+- 回應係 { data: [ {seq, stop}, ... ] }
+- 另外去 https://data.etabus.gov.hk/v1/transport/kmb/stop/ 攞全港站名
+- 整一個「站 ID → 站名」對照表，然後每個站做一個 button 放入 id="stop-list"
+- 顯示格式：「1. 中秀茂坪」</pre>
+  <button class="copy" data-t="p2">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>撳 <code>1A</code> 之後出 35 行站名，第一行係「<code>1. 中秀茂坪</code>」，
+    最後一行係「<code>35. 尖沙咀碼頭</code>」。
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <h2><span class="num">3</span>幾多分鐘到站</h2>
+  <div class="goal">目標：撳一個站 → 出「仲有幾分鐘」</div>
+  <pre id="p3">請修改 @app.js 裡面嘅 showEta() function：
+- 撳站之後，去 https://data.etabus.gov.hk/v1/transport/kmb/stop-eta/{站ID}
+- 回應係 { data: [ {route, dest_tc, eta, eta_seq}, ... ] }
+- eta 係一個時間字串，例如 "2026-09-18T16:30:00+08:00"，
+  請計返仲有幾分鐘（同而家時間比較），如果冇 eta 就顯示「—」
+- 站名寫入 id="eta-title"，班次放入 id="eta-list"
+- 如果冇班次（data 係空陣列），顯示「呢個站暫時冇班次」
+- 畫面唔好太長，只顯示頭 8 班</pre>
+  <button class="copy" data-t="p3">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>例如「<code>1A　去 尖沙咀碼頭　3 分鐘</code>」。
+    <b>收咗車嘅路線會顯示「—」—— 呢個係正常，唔係 bug。</b>
+  </div>
+  <div class="warn">⚠️ 如果全部都是「—」，可能係條線收咗車。試下撳第二條路線。</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <h2><span class="num">4</span>加港鐵</h2>
+  <div class="goal">目標：撳「中環站」→ 出港鐵下一班車</div>
+  <pre id="p4">請修改 @app.js 裡面嘅 loadMtr() function：
+- 去 https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?line=TWL&sta=CEN
+- 回應係 { status: 1, data: { "TWL-CEN": { UP: [...], DOWN: [...] } } }
+- 如果 status === 0，顯示「港鐵而家冇班次（可能收咗車）」
+- 用 for...of 行 UP 同 DOWN 兩個方向，每個方向只顯示頭 3 班
+- UP 顯示做「上行」、DOWN 顯示做「下行」
+- 每個班次顯示：方向、去邊個站（dest）、仲有幾分鐘（ttnt 已經係分鐘）
+- 放入 id="mtr-list"</pre>
+  <button class="copy" data-t="p4">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>「<code>上行　去 荃灣　2 分鐘</code>」。
+    港鐵嘅 <code>ttnt</code> 本身就係「仲有幾分鐘」，唔使計。
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step">
+  <h2><span class="num">5</span>自動更新 + 唔怕斷線</h2>
+  <div class="goal">目標：每 15 秒自己更新一次，斷線都唔會爛</div>
+  <pre id="p5">請修改 @app.js 裡面嘅 startAutoRefresh() 同 refreshOnce() 兩個 function：
+- startAutoRefresh(seconds)：
+  - 先 clearInterval(timer) 清走舊嘅 timer（唔清就會愈跑愈快）
+  - 然後 timer = setInterval(refreshOnce, seconds * 1000)
+  - 將 id="btn-refresh" 嘅文字改成「自動刷新中…」同設 disabled = true
+  - 最後即刻 await refreshOnce() 一次，唔使等 15 秒
+- refreshOnce()：如果已經揀咗路線同站，就重新攞一次到站時間
+  （即係再跑一次 loadStops 同 showEta 用到嘅邏輯）
+- 全部 fetch 都要用 try / catch 包住：
+  失敗就顯示「網絡有問題，等陣再試」，唔可以出紅色error或者令畫面爛咗</pre>
+  <button class="copy" data-t="p5">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>撳「自動刷新」之後，個掣變灰、寫住「自動刷新中…」，
+    數字每 15 秒自己變一次。<b>試下拔網線／熄 wifi</b> —— 應該出友善訊息，唔係爛畫面。
+  </div>
+  <div class="warn">⚠️ 呢個係最重要嘅一步：<b>程式遇到錯誤唔可以死</b>。真實世界一定會有網絡問題。</div>
+</div>
+
+<!-- DEBUG -->
+<div class="step">
+  <h2><span class="num">?</span>壞咗點算？</h2>
+  <div class="goal">唔好慌，把錯誤「交畀」AI</div>
+  <pre id="p6">我頭先改完之後出現咗問題：
+[喺呢度貼上錯誤訊息，或者描述你見到嘅嘢]
+畫面／Console 顯示：
+[貼上紅字]
+請幫我搵出原因並修好，唔好改其他冇問題嘅部分。</pre>
+  <button class="copy" data-t="p6">複製</button>
+  <div class="expect">
+    <b>點搵錯誤訊息？</b>瀏覽器按 <code>F12</code> → 揀 <b>Console</b> → 見到紅色字就 copy 落嚟。<br>
+    <b>AI 改爛咗？</b>喺 Cursor 對話框同佢講：「<b>請還原上一步嘅改動</b>」。
+  </div>
+</div>
+
+<footer>
+  用政府開放數據（data.gov.hk）· 唔需要 API key · 資料來源：九巴、港鐵<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
