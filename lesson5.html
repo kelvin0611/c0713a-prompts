@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 · 自由專題 — C0713A</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 5 · 自由專題</h1>
+<div class="sub">學識嘅係方法，唔係一個 app　·　嶺南衡怡紀念中學　·　按「複製」→ 貼落 Cursor</div>
+
+<div class="howto">
+  <b>點用呢張卡？</b>
+  <ol>
+    <li>開 <b>Cursor</b>，打開你下載返嚟嘅 template 資料夾</li>
+    <li>右邊 Chat 面板，左下角揀 <b>Agent</b> 模式</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b></li>
+    <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
+    <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
+  </ol>
+  <br>
+  <b>今日冇指定題目。</b>巴士可以、天氣可以、Pokémon 可以、書同股票都可以。
+  因為你學嘅係<b>方法</b>：搞清楚要咩資料 → 搵到提供資料嘅 API → 填 5 個 function → 發布。
+</div>
+
+<!-- ============ 熱身 ============ -->
+<div class="parthead" id="warmup">
+  <span class="tagline">PART 0</span>
+  <h2>熱身：個骨架係點運作嘅？</h2>
+  <p>同一副骨架，換一個資料來源就變成另一個 app。先叫 AI 拆開嚟講清楚。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">0</span>睇清楚個骨架</h2>
+  <div class="goal">唔改任何嘢，先搞清楚 5 個 function 各自負責咩</div>
+  <pre id="f1">請睇下 @app.js（我啱啱下載返嚟嘅 template）。唔准改任何嘢，我淨係想知：
+
+1. 呢個骨架係靠邊 5 個 function 撐起？
+   （loadList / showDetail / showInfo / loadOther / startAutoRefresh）
+2. 逐個講：輸入係咩、做咩、最後會喺畫面邊個位置顯示嘢。
+3. 邊幾個位置有 // TODO 未填？
+4. 如果我今日只係換一個完全唔同嘅資料來源（換一個 API），
+   理論上需要改邊幾個 function？要唔要改 HTML？
+
+用最簡單嘅講法，我係中三學生。</pre>
+  <button class="copy" data-t="f1">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>AI 答嘅，同你<b>自己打開 app.js 睇到嘅</b>係唔係一樣？<br>
+    <b>點驗：</b>攞住佢講嘅 function 名，喺 Cursor 用搜尋（Cmd + F）搵一次，真嘅存在嗎？<br>
+    <b>重點答案：</b>通常<b>只需要換 loadList() 裡面嘅 API 網址同解析方式</b>，
+    HTML 幾乎唔使改 —— 呢句就係今日嘅全部秘密。
+  </div>
+</div>
+
+<!-- ============ 主線任務 ============ -->
+<div class="parthead" id="main">
+  <span class="tagline">PART 1</span>
+  <h2>五步，由一個 template 去到你自己嘅 app</h2>
+  <p>跟住做。每個 step 做完撳 Keep All ＋ 重新整理。<b>換一句 API，就換到題目</b> —— 呢頁學嘅係「方法」。</p>
+</div>
+
+<!-- 任務 1 -->
+<div class="step">
+  <h2><span class="num">1</span>下載 Template</h2>
+  <div class="goal">目標：解壓、Cursor 開到、喺 localhost 真嘅跑起</div>
+  <pre id="f2">請一步一步教我由零開始，用一個 template 開一個新專案。我係中學生，未用過 Terminal。
+
+1. 先教我下載呢個 ZIP（我只想下載 ZIP，唔要 clone、唔要用 git）：
+   https://github.com/kelvin0611/c0713a-template/archive/refs/heads/main.zip
+   （下載完叫咩檔名？會喺邊個資料夾？）
+2. 教我解壓縮（macOS 上面點做），解壓完個資料夾叫咩名。
+3. 教我喺 Cursor 用「Open Folder」打開嗰個資料夾
+   （⚠️ 記住要開裡面有 index.html 嘅那一層，唔好開到外層）。
+4. 教我喺 Cursor 嘅 Terminal 跑起個 server，同埋喺瀏覽器打開邊個網址。
+5. 話我知跑得成功嘅話，畫面應該見到咩。
+6. ⚠️ 如果我直接雙擊 index.html 打開，會發生咩事？為咩會咁？
+7. 教我點樣停咗個 server。</pre>
+  <button class="copy" data-t="f2">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ 佢教你用 <code>python3 -m http.server 8000</code>，然後開 <code>http://localhost:8000</code>。<br>
+    ✅ 佢有講「唔可以雙擊 index.html」—— 因為咁樣係 <code>file://</code>，
+    會令 fetch 同 localStorage 出事，畫面一片空白。<br>
+    ✅ 你自己真嘅見到個 template 畫面（唔係一片白、唔係一堆文字）。<br>
+    ⚠️ 見到「connection refused」→ server 未跑起，返 Terminal 睇下係唔係出咗錯。
+  </div>
+  <div class="warn">⚠️ 唔好將個 ZIP 解壓去 Desktop 再開，好容易開錯層。放喺 <code>Projects</code> 之類嘅位置，一層一層睇清楚。</div>
+</div>
+
+<!-- 任務 2 -->
+<div class="step">
+  <h2><span class="num">2</span>定題目：你想要咩資料？</h2>
+  <div class="goal">目標：唔係「我想整一個 app」，而係「我想要咩資料」</div>
+  <pre id="f3">我想用呢個 template 做我自己嘅 app，但未想到做咩。請幫我諗。
+
+第一步（好重要）：先問我 3 條問題，了解我想要咩資料。
+例如：你平時最想知咩？鍾意咩事物？你想要「一覽表」定係「詳細資料」？
+
+第二步：等我答完之後，推薦 3 個題目。每個題目都要寫：
+- 個 app 幫人做咩（一句話）
+- 用邊個資料來源（大概係邊個 API、提供咩資料）
+- 難度：可唔可以 1 個鐘內做到？
+- 畫面大概長咩樣（列表？詳情？）
+
+第三步：列完之後停手，等我揀。
+
+⚠️ 唔准喺我未揀之前寫任何 code，亦唔准自己幫我決定題目。
+⚠️ 唔准推薦要輸入個人資料（身分證、地址、銀行、醫療）嘅題目。</pre>
+  <button class="copy" data-t="f3">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ 佢有<b>先問你</b>才推薦 —— 呢個就係跟指示。<br>
+    ❌ 如果佢一口氣推薦咗又自己開始寫 code（或者自己幫你揀咗）→ 冇跟指示，可以直接叫停佢。<br>
+    ❌ 推薦要你登入、要 API key、或者要你畀個人資料嘅題目 → 唔要。<br>
+    <b>你自己揀題目嘅方法：</b>揀一個<b>你真係想知</b>嘅資料。想知，你才會做得完。
+  </div>
+</div>
+
+<!-- 任務 3 -->
+<div class="step">
+  <h2><span class="num">3</span>摻 API（要真 curl 驗一次）</h2>
+  <div class="goal">目標：搵到一個免 API key、有 CORS、真嘅攞得到資料嘅 API</div>
+  <pre id="f4">我揀咗題目：（填你揀嘅題目，例如：睇 Pokemon 資料 / 睇匯率 / 睇天氣 / 睇書）。
+
+請推薦可以用嘅公開 API。硬性條件（唔符合就唔准推薦）：
+1. 唔需要 API key、唔需要註冊、唔需要登入
+2. 支援 CORS（即係可以由本地網頁同 GitHub Pages 直接 fetch）
+3. 回傳 JSON，格式清楚
+
+請畀我 2–3 個選擇，每個都寫：
+- 完整網址（連參數）
+- 回傳格式：舉一個真嘅 JSON 例子（唔准自己作數據）
+- 有咩限制（速率限制、覆蓋範圍、語言、會唔會忽然死）
+- 一個要小心嘅位
+
+⚠️ 最緊要嘅一步：你一定要真嘅驗證。請畀我一條 curl 命令，
+叫我自己喺 Terminal 行一次，例如：
+    curl -s "（網址）" | head -c 500
+並且話我知：行完應該見到咩、見到咩就代表唔 work。
+
+如果你唔肯定個 API 而家仲有冇效，就直接講「唔肯定」，
+唔准假設一定得。唔准自己作一個網址出嚟。</pre>
+  <button class="copy" data-t="f4">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ <b>最實際嘅檢查：</b>copy 條 curl 落 Terminal 真嘅行一次 —— <b>有真嘅 JSON 返嚟嗎？</b>
+    （要睇到真數據，唔係 <code>{"error":"..."}</code> 或者 404。）<br>
+    ✅ 喺瀏覽器直接開嗰條網址，見得到 JSON → 通常代表 CORS 有機會 OK。<br>
+    ❌ AI 話「呢個 API 應該可以用」但係冇 curl 過 → 懷疑佢，自己試。<br>
+    ❌ 佢畀你一個要 <code>?api_key=xxxxx</code> 嘅網址 → 換過另一個。<br>
+    ❌ 佢自己作咗一段 JSON 出嚟當例子（數字靚到假）→ 唔好信。
+  </div>
+  <div class="warn">⚠️ API 係會死、會改格式嘅。所以今日學嘅係「<b>點驗一個 API</b>」，唔係「呢個 API 一定得」。</div>
+</div>
+
+<!-- 任務 4 -->
+<div class="step">
+  <h2><span class="num">4</span>填 5 個 function</h2>
+  <div class="goal">目標：骨架有血有肉，列表、詳情、錯誤訊息都出得到</div>
+  <pre id="f5">請打開 @app.js，填好呢 5 個 function。用我上面 curl 驗證過嘅 API：
+（貼上你驗證過嘅 API 網址同回傳格式）
+
+1. loadList()
+   —— fetch 個 API，攞資料，做成一個列表放入 id="list"
+   —— 每一項要能分辨身份（例如有 id / code），畀之後撳入去查詳情用
+2. showDetail(id)
+   —— 用戶撳某一項之後，攞同顯示該項嘅詳情放入 id="detail"
+   —— 如果詳情已經喺列表資料裡面，就唔好再 fetch 一次（重用已有資料）
+3. showInfo(msg)
+   —— 顯示狀態／錯誤訊息（「載入中…」「網絡有問題，等陣再試」「搵唔到資料」）
+   —— 一律用人話，唔可以顯示英文 error 或者出紅字
+4. loadOther()
+   —— 攞第二種相關資料（例如另一個分類、或者補充資料），放入 id="other"
+5. startAutoRefresh(seconds)
+   —— 每 N 秒自動更新。⚠️ 一定要先 clearInterval 清走舊 timer 才開新嘅
+   —— 唔清就會愈跑愈快；亦唔可以重複開多過一個 timer
+
+硬性要求：
+- 每個 function 都要有 try / catch，出錯要用 showInfo() 講人話
+- 每次 fetch 之後要檢查 response.ok
+- 5 個 function 開頭各寫一句中文註釋，講明佢做咩
+- 唔准改 HTML 嘅 id 名、唔准改 CSS
+- 資料嚟自 API 嘅話，唔准寫死假數據當係真
+
+寫完之後：
+(a) 話畀我知邊個 function 對應畫面邊部分
+(b) 列出「你覺得呢次最可能出錯嘅 3 個位」，等我逐個檢查</pre>
+  <button class="copy" data-t="f5">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ 5 個 function 真嘅都填咗？喺 Cursor 搵 <code>TODO</code> 應該搵唔到（或者只有一個）。<br>
+    ✅ 畫面：列表出到嘢、撳入去出詳情、出錯有人話（<b>斷網試一次</b>，睇下會唔會出「網絡有問題」）。<br>
+    ✅ Console 冇紅字（F12 → Console）。<br>
+    ❌ 最易捉到嘅錯：<code>setInterval</code> 出現咗兩次（timer 會愈跑愈快）；
+    或者 <code>showDetail()</code> 又 fetch 一次已經有嘅資料。<br>
+    ✅ 佢有冇列出自己「最可能出錯嘅 3 個位」—— 呢啲位你就去驗。
+  </div>
+  <div class="warn">⚠️ <b>換一句 API 就換到題目。</b>呢 5 個 function 填完，你以後任何題目都係填呢 5 個 —— 呢個就係今日學嘅「方法」。</div>
+</div>
+
+<!-- 任務 5 -->
+<div class="step">
+  <h2><span class="num">5</span>發布（同 Lesson 4 一樣）</h2>
+  <div class="goal">目標：你第二個 app 都有一個真嘅網址</div>
+  <pre id="f6">跟返 Lesson 4 嘅流程，幫我將呢個新 app 發布上 GitHub Pages。請逐步嚟：
+
+1. 「發布前檢查」：清走 console.log、有冇破圖、手機（400px）會唔會爆版、
+   有冇寫死嘅測試假數據、標題有冇寫好
+2. 寫一個 README.md：呢個 app 做咩、點跑、資料來源（邊個 API、要唔要 API key）、
+   技術（純 HTML/CSS/JS）。⚠️ 唔准加入我嘅全名或個人資料。
+3. 逐句教我：git init → git add → git commit → git branch -M main →
+   git remote add origin（我嘅新 repo 網址）→ git push -u origin main
+   —— 每一句都講：做咩、成功會見到咩、失敗最常見係咩原因
+4. 教我喺 GitHub 網頁開 GitHub Pages（Settings → Pages → Deploy from a branch →
+   main → / (root) → Save），然後等 1–3 分鐘
+5. 最後畀我一段可以分享嘅文案（一句話 ＋ 我條網址）
+
+⚠️ 安全規矩：
+- 唔准叫我將密碼、token、API key 或個人資料寫入任何檔案、命令或 commit 訊息
+- 登入我自己做，唔准叫我貼任何密碼或 token 落任何地方
+- 呢個係一個全新嘅 repo，唔准搞亂我之前 Lesson 4 嘅專案</pre>
+  <button class="copy" data-t="f6">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ 你條網址<b>用手機開得到</b>，而且 app 裡面真係出到資料（唔係空白、唔係永遠「載入中…」）。<br>
+    ✅ <b>換一句 API 就換到題目</b> —— 如果你仲有時間，再叫 AI 換第二個 API 落 loadList()，
+    睇下係唔係改一個 function 就做到全新 app。做得到，你就真嘅學識咗「方法」。<br>
+    ❌ 佢叫你貼 token／密碼 → 唔好照做，當場停。<br>
+    ✅ 確認你 Lesson 4 嗰個舊 repo 冇被改（去 GitHub 睇下最後 commit 時間）。
+  </div>
+  <div class="warn">⚠️ 交功課前：呢個網址就係你今日嘅成果。答得出「我個 app 用咩資料、邊度嚟、點更新」，就算完成。</div>
+</div>
+
+<!-- 求救 -->
+<div class="step">
+  <h2><span class="num">?</span>壞咗點算？</h2>
+  <div class="goal">API 死咗、CORS 爆、頁面空白 —— 把原句錯誤「交畀」AI</div>
+  <pre id="f7">我做自由專題途中出現咗問題，請幫我一步步解決：
+
+我做到邊一步：
+[例如：填完 loadList() 之後 / 網址改做自己嗰個 API 之後]
+我打咗咩 / 改咗咩：
+[貼上你改嘅 code 或者命令]
+見到咩錯誤（原句 copy 過嚟，唔要改字）：
+[按 F12 → Console 貼紅字，或者 Terminal 貼紅字]
+我期望應該發生：
+[例如：見到一個列表]
+
+請：
+1. 先解釋呢個錯誤係咩意思（用中學生聽得明嘅講法）
+2. 判斷係邊一種：API 冇回應？CORS 被阻？JSON 格式同你想像唔同？定係 code 寫錯？
+3. 一步一步教我修，改最少嘅嘢，唔好改其他正常嘅部分
+
+⚠️ 唔准自己作一個「假數據」去遮住個錯誤。我要知真正原因。</pre>
+  <button class="copy" data-t="f7">複製</button>
+  <div class="expect">
+    <b>常見三種：</b><code>CORS policy</code> → 呢個 API 唔可以由網頁直接 fetch，換過一個；
+    <code>Failed to fetch</code> → 網址打錯或者 API 死咗，自己 curl 再驗一次；
+    <code>Cannot read properties of undefined</code> → JSON 格式同 code 假設唔同，叫 AI 印返個實際回傳睇。<br>
+    <b>AI 改爛咗？</b>同佢講：「<b>請還原上一步嘅改動</b>」。<br>
+    <b>卡死超過 15 分鐘：</b>叫 AI「用最簡單嘅方法，先出一個純文字列表，唔要靚」—— 行得通再慢慢加。
+  </div>
+</div>
+
+<footer>
+  用政府開放數據（data.gov.hk）同公開免費 API · 未必需要 API key · 呢一頁只係文字，唔會呼叫 API<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>

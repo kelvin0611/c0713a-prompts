@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 · 發佈你嘅 App — C0713A</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 4 · 發佈你嘅 App</h1>
+<div class="sub">我整個 app，你可以開嚟用　·　嶺南衡怡紀念中學　·　按「複製」→ 貼落 Cursor</div>
+
+<div class="howto">
+  <b>點用呢張卡？</b>
+  <ol>
+    <li>開 <b>Cursor</b>，打開你嘅交通 App 專案資料夾</li>
+    <li>右邊 Chat 面板，左下角揀 <b>Agent</b> 模式</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b></li>
+    <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
+    <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
+  </ol>
+  <br>
+  <b>今日嘅目標：</b>唔再只係「喺你部電腦開得到」，而係<b>全世界都開得到</b> —— 你會有一個真嘅網址。
+</div>
+
+<!-- ============ 熱身 ============ -->
+<div class="parthead" id="warmup">
+  <span class="tagline">PART 0</span>
+  <h2>熱身：交貨之前，先驗一次貨</h2>
+  <p>叫 AI 講返你個 app 而家嘅狀態。要發布，先要知道自己有咩未搞好。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">0</span>我個 App 見得人未？</h2>
+  <div class="goal">唔改任何嘢，先叫 AI 做一次真實嘅狀態報告</div>
+  <pre id="g1">我準備將呢個 app 發布出去畀同學用。請你先睇下 @index.html 同 @app.js，
+用中文話畀我知，唔准改任何嘢：
+
+1. 而家個 app 確實有咩功能？（只講真嘅存在嘅，唔好講「可能」）
+2. 有邊啲位係未寫完、或者一睇就知會壞嘅？
+3. 如果交畀街外人用（佢唔知我寫咩、網絡又可能差），你最擔心邊一樣？
+4. 你覺得而家可以發布嗎？請老實答「可以」或者「未可以」，並講理由。
+
+最後：列出你打算幫我修嘅 3 件事（但暫時唔好改）。</pre>
+  <button class="copy" data-t="g1">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>AI 講嘅功能，同你<b>親眼見到</b>嘅係唔係一樣？<br>
+    <b>點驗：</b>佢講一樣，你就去瀏覽器撳一樣。佢話有「港鐵」，你就撳下港鐵出唔出嘢。<br>
+    <b>唔收貨：</b>「整體功能完整，可以發布」—— 追問佢：「請務必列出最少 3 個實際風險。」<br>
+    <b>記住數字：</b>佢列嘅 3 件要修嘅事，之後 Task 1 要對返。
+  </div>
+</div>
+
+<!-- ============ 主線任務 ============ -->
+<div class="parthead" id="main">
+  <span class="tagline">PART 1</span>
+  <h2>五步，由「我部電腦」去到「全世界開得到」</h2>
+  <p>跟住做。每步做完撳 Keep All ＋ 重新整理，做到 Step 5 你就有一個可以分享嘅網址。</p>
+</div>
+
+<!-- 任務 1 -->
+<div class="step">
+  <h2><span class="num">1</span>發布前檢查</h2>
+  <div class="goal">目標：清走所有「唔應該畀人見到」嘅嘢</div>
+  <pre id="g2">請幫我為呢個 app 做一次「發布前檢查」。逐項真嘅去睇 @index.html 同 @app.js，
+然後用中文報告，每一項都要寫明檔案同 function 名：
+
+1. 有冇剩低嘅 console.log / debugger / alert / TODO 註釋（呢啲要清走）
+2. 有冇破圖、或者連唔到嘅連結（href="#"、圖片路徑唔存在）
+3. 手機（大約 400px 闊）睇會唔會爆版？有冇寫死像素寬度（例如 width: 1200px）
+4. 有冇寫死嘅臨時資料（測試用嘅假路線號碼、假站名、「測試測試」字眼）
+5. 網頁標題 &lt;title&gt; 同 &lt;h1&gt; 有冇寫好、有冇改做我嘅名
+6. 所有 fetch 係唔係都有 try / catch，出錯會唔會出人話
+7. 頁面用唔用得鍵盤？所有掣有冇文字（唔好淨係一個圖示）
+
+報告完之後，問我要唔要你逐項修好。⚠️ 未經我同意，唔准自己改任何 code。</pre>
+  <button class="copy" data-t="g2">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ 好嘅報告：講得出具體位置，例如「<code>app.js</code> 第 42 行有 console.log」。</li>
+      <li>❌ 吹水報告：「建議清除多餘的 console.log」但唔講邊度 —— 可能係佢根本冇睇。</li>
+      <li>❌ 佢冇問你就自己改咗 code —— 違反指示，追問佢原因。</li>
+    </ul>
+    <b>你自己再行一次最後檢查：</b>手機模式（F12 → 撳電話圖示 → 揀 iPhone）睇下有冇橫向滾動條。
+  </div>
+  <div class="warn">⚠️ 呢一步好多人跳過。但街外人開到你個 app 嘅第一秒，就係睇呢啲細節。</div>
+</div>
+
+<!-- 任務 2 -->
+<div class="step">
+  <h2><span class="num">2</span>寫 README</h2>
+  <div class="goal">目標：任何人打開你 GitHub 都知你做咩、點跑</div>
+  <pre id="g3">請幫我在專案根目錄新增一個 README.md，用繁體中文（香港用語）。
+
+要包含：
+1. 一個標題 ＋ 一個 emoji
+2. 一句話簡介：呢個 app 做咩
+3. 功能列表（列點）
+4. 點樣喺本機跑起嚟：命令 ＋ 之後開邊個網址
+5. 資料來源：政府開放數據 data.gov.hk（九巴、港鐵），並講明唔需要 API key
+6. 技術：純 HTML / CSS / JavaScript，冇用框架、冇外部依賴
+7. 最後一句：呢個係中三 STEM 課堂嘅學習作品
+
+嚴格要求：
+- 只准新增 README.md 一個檔案，其他檔案一律唔准改
+- 唔准加入我嘅全名、班別、學校電郵或任何個人資料
+- 唔准作任何未做嘅功能（例如「支援 iOS/Android App」）</pre>
+  <button class="copy" data-t="g3">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>開 README.md（喺 Cursor 撳一下個檔）睇下：<br>
+    ✅ 跟住佢寫嘅嗰行命令<b>真嘅跑得起</b>嗎？copy 落 Terminal 試一次。<br>
+    ✅ 佢寫嘅功能，你部 app 真係有嗎？冇嘅就係作嘢。<br>
+    ✅ 有冇亂加入你嘅個人資料（全名、電郵）。<br>
+    <b>加分動作：</b>叫佢「加一個『截圖』段落，教我點擺張圖上 README」。
+  </div>
+</div>
+
+<!-- 任務 3 -->
+<div class="step">
+  <h2><span class="num">3</span>上 GitHub</h2>
+  <div class="goal">目標：你嘅 code 第一次離開你部電腦，去咗雲上面</div>
+  <pre id="g4">請一步一步教我將呢個專案推上 GitHub。我係中學生，未用過 git，唔識 Terminal。
+
+流程要求：
+1. 先叫我喺 GitHub 網站自己註冊同登入，再建立一個新 repository
+   （教我點揀 Public、要唔要 Add README）
+2. 然後逐句教我喺 Cursor 嘅 Terminal 打命令：
+   git init → git add → git commit → git branch -M main →
+   git remote add origin（我嘅 repo 網址）→ git push -u origin main
+3. 每一句命令都要講：呢句做咩、成功嘅話我會見到咩樣、失敗嘅話最常見係咩原因
+4. 教我點樣自己登入：叫我自己喺 Terminal 照住佢指示登入
+   （GitHub 會彈瀏覽器，或者叫我用 Personal Access Token —— 我自己入，唔會畀任何人）
+5. ⚠️ 我唔想 push 咗啲唔應該 push 嘅嘢，請教我檢查：
+   - 用 git status 睇下會 push 咩檔案
+   - 教我寫一個 .gitignore（例如唔要 node_modules、.DS_Store、.env）
+6. 如果之後我收咗新改動想再上傳，教我打邊幾句
+
+⚠️ 安全規矩（一定要跟）：
+- 唔准叫我將密碼、token、API key 或個人資料寫入任何檔案、命令、.env 或 commit 訊息
+- 唔准叫我用 git config 寫死帳號密碼
+- 你自己亦唔准輸出任何密碼或者 token</pre>
+  <button class="copy" data-t="g4">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ 佢叫你<b>自己</b>喺瀏覽器／Terminal 登入 —— 呢個先係正確做法。</li>
+      <li>❌ 如果佢叫你「喺個檔案裡面寫低 token」或者「將密碼放入網址」→ <b>當場停手</b>，唔好照做。</li>
+      <li>✅ 佢有冇教你 <code>git status</code> 同 <code>.gitignore</code>。</li>
+      <li>✅ <code>git push</code> 成功之後，去 GitHub 網頁撳 F5，見到你嘅檔案真係喺上面。</li>
+    </ul>
+    <b>點驗：</b>去 <code>github.com/（你嘅用戶名）/（repo 名）</code>，睇下有幾多個檔案、最後 commit 係幾時。
+  </div>
+  <div class="warn">⚠️ <b>安全規矩：prompt 裡面永遠不可以包含密碼、token、個人資料。</b>上 GitHub 一律要<b>你自己登入</b>，唔好交任何密碼畀 AI，亦唔好寫落檔案。</div>
+</div>
+
+<!-- 任務 4 -->
+<div class="step">
+  <h2><span class="num">4</span>開 GitHub Pages</h2>
+  <div class="goal">目標：拿到一個你自己嘅網址，全世界都開得到</div>
+  <pre id="g5">我已經將個 app 推上 GitHub。請教我喺 GitHub 網頁開啟 GitHub Pages，
+等我拿到一條 https://（我嘅用戶名）.github.io/（repo 名）/ 嘅網址。
+
+請逐步教我：
+1. 入去 repo → Settings → 左邊揀 Pages
+2. Source 揀「Deploy from a branch」
+3. Branch 揀 main、資料夾揀 / (root) → Save
+4. 話我知要等 1–3 分鐘，然後重新整理個頁面才會見到網址
+5. 教我點樣測試條網址（如果出 404，最常見係咩原因、要點等、幾時再試）
+6. 教我之後改咗 code，要點樣更新個網站（push 之後會自動重新發布）
+
+另外一定要答我：
+- 我個 app 而家係唔係喺子路徑 /（repo 名）/ 之下？如果係，
+  我個 app 裡面有冇「寫死嘅路徑」（例如 fetch("/api/...")、src="/app.js"）
+  會令佢喺 GitHub Pages 上面壞掉？如果有，應該點寫才對？
+
+⚠️ 唔准叫我在任何地方輸入密碼或 token。要登入我自己喺瀏覽器做。</pre>
+  <button class="copy" data-t="g5">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ 你嘅網址<b>喺手機都開得到</b>（唔係你部電腦，係真嘅手機或者關咗 wifi 試）。</li>
+      <li>✅ 開到之後，app 裡面嘅功能<b>真係行得通</b>（路線、到站時間出到嘢）。</li>
+      <li>❌ 如果一片空白、或者 Console 一片紅 —— 多數係路徑問題（絕對路徑 <code>/app.js</code>）或者
+      用咗 <code>file://</code> 開發嘅寫法。返去問 AI 修。</li>
+      <li>❌ 佢叫你「將 token 貼落網址」→ 唔好照做。</li>
+    </ul>
+    <b>點驗：</b>用你自己部手機（唔用校網 wifi，用 4G）開一次你條網址。
+  </div>
+</div>
+
+<!-- 任務 5 -->
+<div class="step">
+  <h2><span class="num">5</span>分享出去</h2>
+  <div class="goal">目標：一句話講清楚你個 app 做咩，貼落群組</div>
+  <pre id="g6">請幫我寫一段分享文案，我會貼落班嘅群組（WhatsApp / IG 都可以）。
+
+資料：
+- 我個 app 係：（填一句，例如「睇九巴同港鐵到站時間」）
+- 網址：（填你嘅 GitHub Pages 網址）
+
+要求：
+1. 一句話講清楚做咩同有咩用，唔好超過 40 字
+2. 跟住貼上我條網址
+3. 語氣似中三學生講嘢，唔好硬銷、唔好堆 emoji（最多 1 個）
+4. 最後加一句叫同學試下嘅話
+5. ⚠️ 唔准寫我嘅全名、班別、學號、電話、電郵或者其他個人資料
+6. 唔准吹水（例如「全港最快」、「AI 驅動」呢啲未做嘅嘢）
+
+請畀我 2 個版本：一個正經、一個好笑。</pre>
+  <button class="copy" data-t="g6">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    ✅ 文案裡面嘅網址，撳落去<b>真嘅開得到</b>（自己 copy 落瀏覽器試一次）。<br>
+    ✅ 有冇個人資料（全名、班別、電話）—— 有就刪咗佢才貼出去。<br>
+    ✅ 有冇講咗一啲你 app 其實冇嘅功能（吹水）。<br>
+    <b>呢段文案就係你今日嘅「作品發表」</b> —— 貼出去，睇下同學有冇人真係開。
+  </div>
+  <div class="warn">⚠️ 分享 = 你嘅真名同網址會公開。所以：文案裡面唔放個人資料，網址就係你嘅公共身份。</div>
+</div>
+
+<!-- 求救 -->
+<div class="step">
+  <h2><span class="num">?</span>壞咗點算？</h2>
+  <div class="goal">Git、Pages、權限出事 —— 把錯誤原句「交畀」AI</div>
+  <pre id="g7">我喺發布途中出現咗問題，請幫我一步步解決：
+
+我做到邊一步：
+[例如：打完 git push / 開完 GitHub Pages / 開網址之後]
+我打咗咩命令：
+[貼上你打嘅命令]
+見到咩錯誤（原句 copy 過嚟，唔要改字）：
+[貼上 Terminal 或者 Console 嘅紅字]
+我期望應該發生：
+[例如：網頁開到、見到路線掣]
+
+請：
+1. 先解釋呢個錯誤係咩意思（用中學生聽得明嘅講法）
+2. 一步一步教我點修，最後先至叫我打下一句命令
+3. 唔准叫我貼密碼或 token 落任何地方；要登入我自己做</pre>
+  <button class="copy" data-t="g7">複製</button>
+  <div class="expect">
+    <b>點搵錯誤？</b>Terminal 嘅紅字<b>原句</b> copy（唔好自己改字，錯字會令 AI 亂猜）。<br>
+    <b>常見三種：</b><code>Permission denied</code>（未登入，自己重新登入）、
+    <code>rejected</code>（遠端有嘢你未有，先 <code>git pull</code>）、
+    Pages 出 404（未發布完，等 3 分鐘再試）。<br>
+    <b>AI 改爛咗？</b>同佢講：「<b>請還原上一步嘅改動</b>」。
+  </div>
+</div>
+
+<footer>
+  用政府開放數據（data.gov.hk）· 唔需要 API key · 呢一頁只係文字，唔會呼叫 API<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>

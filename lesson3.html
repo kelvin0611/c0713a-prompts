@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 · 捉 AI 錯處 — C0713A</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 3 · 捉 AI 錯處</h1>
+<div class="sub">AI 會寫錯，你要捉到　·　嶺南衡怡紀念中學　·　按「複製」→ 貼落 Cursor</div>
+
+<div class="howto">
+  <b>點用呢張卡？</b>
+  <ol>
+    <li>開 <b>Cursor</b>，打開你 Lesson 1、2 嘅專案資料夾</li>
+    <li>右邊 Chat 面板，左下角揀 <b>Agent</b> 模式</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b></li>
+    <li>貼落 Cursor 對話框 → 按 <b>Enter</b></li>
+    <li>AI 寫完之後，一定要撳右上角 <b>「Keep All」</b>，再回瀏覽器 <b>重新整理</b></li>
+  </ol>
+  <br>
+  <b>今日唔一樣：</b>唔係「AI 寫咩都得」，係<b>你要做導演</b> —— AI 寫完，你負責驗收、捉錯。
+</div>
+
+<!-- ============ 熱身 ============ -->
+<div class="parthead" id="warmup">
+  <span class="tagline">PART 0</span>
+  <h2>熱身：訓練「唔信」嘅習慣</h2>
+  <p>先用一句 prompt 叫 AI 自己講出「邊度可能錯」。呢個就係今日最重要嘅動作。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">0</span>先懷疑一下自己寫嘅嘢</h2>
+  <div class="goal">唔係叫 AI 改嘢，係叫佢自首 —— 講出自己寫嘅 code 邊度靠唔住</div>
+  <pre id="e1">請睇下你頭先幫我寫嘅 @app.js 同 @index.html（路線、站名、到站時間、
+港鐵、自動更新）。唔准改任何嘢，我淨係想知：
+
+1. 邊 3 個位最易出錯？請逐個講：位置（function 名）、咩情況下會出事、會出現咩症狀。
+2. 有冇你「假設咗一定會成功」嘅地方（例如假設網絡一定會通、假設 API 一定有回應）？
+3. 有冇你自己都唔肯定嘅地方？請老實講，唔好扮嘢。
+
+最後用一句話總結：如果你要放假一星期唔理呢個 app，你最怕邊度會壞？</pre>
+  <button class="copy" data-t="e1">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>AI 有冇講得出<b>具體嘅位置</b>（function 名、邊個 fetch），
+    而唔係泛泛而談「要注意錯誤處理」。<br>
+    <b>唔錯嘅回應：</b>例如「<code>loadStops()</code> 裡面有 792 個站，我一次過 map 出嚟，慢嘅話會卡住」。<br>
+    <b>唔收貨：</b>「程式碼整體沒有明顯問題」—— 冇一個 app 係冇問題嘅，追問佢。
+  </div>
+  <div class="warn">⚠️ 今日嘅心態：<b>AI 講嘅嘢，一律當「未證實」</b>。要自己開瀏覽器撳一次、睇一次 Console 才算數。</div>
+</div>
+
+<!-- ============ 主線任務 ============ -->
+<div class="parthead" id="main">
+  <span class="tagline">PART 1</span>
+  <h2>四個「AI 好易做錯」嘅任務</h2>
+  <p>每個任務都有一個陷阱位。你要撳落去試，捉到一個錯 = 1 星。跟住做，每步撳 Keep All ＋ 重新整理。</p>
+</div>
+
+<!-- 任務 1 -->
+<div class="step">
+  <h2><span class="num">1</span>到站前 3 分鐘提示</h2>
+  <div class="goal">目標：真真正正剩 3 分鐘先彈，而且只彈一次</div>
+  <pre id="e2">請幫我加一個「就快到站提示」功能。
+
+請逐點跟足，特別係第 2、3 點：
+
+1. 當某班車計出來仲有 3 分鐘或以下（0 &lt; 分鐘 &lt;= 3），就彈一個提示
+   （用頁面上嘅橫幅、或者手機震一下都可以）。
+
+2. ⚠️ 唔可以一載入頁面或者一撳路線就彈！
+   嗰一刻如果仲有 20 分鐘，就絕對唔准彈任何嘢。
+   只有計出來真正剩 3 分鐘或以下嘅嗰一刻，才彈。
+
+3. ⚠️ 同一班車只准彈一次。唔可以自動更新（每 15 秒）嗰陣又再彈多次。
+   做法：記住已經提示過嘅班次（例如用 route + eta_seq 做 key），彈過就唔再彈。
+
+4. 如果用戶冇揀路線、或者冇揀站，唔好彈。
+
+5. 提示文字要講清楚邊條線、去邊，例如「1A 去尖沙咀碼頭，3 分鐘後到」。
+
+6. 其他一律唔好郁，尤其係自動更新嗰個 timer，唔准改或重寫。
+
+寫完之後，用中文話畀我知：你係用咩方法避免「一載入就彈」同「彈完又彈」？</pre>
+  <button class="copy" data-t="e2">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ 正確：<b>一載入頁面，成版都冇提示</b>；揀完路線、揀完站，都仍然冇。</li>
+      <li>❌ 錯 1：一載入就彈（AI 最常犯 —— 佢會攞第一班車就即刻比對）。</li>
+      <li>❌ 錯 2：彈完又彈 —— 等 15 秒自動更新之後又彈多次，或者彈足十幾次。</li>
+      <li>❌ 錯 3：根本冇彈 —— 你搵一條 3 分鐘內到站嘅班次測試（睇住倒數等）。</li>
+    </ul>
+    <b>點驗：</b>揀條線，睇住嗰個「幾分鐘」由 5 → 4 → 3，睇下係唔係<b>得一次</b>提示。
+  </div>
+  <div class="warn">⚠️ 呢條 prompt 已經寫明「唔係一載入就彈」。AI 照樣做錯，就係捉到錯處 —— 記住寫落筆記本。</div>
+</div>
+
+<!-- 任務 2 -->
+<div class="step">
+  <h2><span class="num">2</span>附近嘅站（拒絕定位會點？）</h2>
+  <div class="goal">目標：用你嘅位置搵最近 5 個巴士站，而且你撳「拒絕」都唔會爛</div>
+  <pre id="e3">請幫我加（如果你上次已經加過，就幫我檢查同補漏）一個
+「搵我附近嘅巴士站」功能：
+
+1. 加一個掣，文字「📍 我附近嘅站」，id="btn-nearby"。
+2. 撳咗用 navigator.geolocation.getCurrentPosition() 攞用戶位置。
+3. 攞到之後，只 fetch 一次 https://data.etabus.gov.hk/v1/transport/kmb/stop/
+   （回應 { data: [ { stop, name_tc, lat, long }, ... ] }，每個站已經有 lat / long，
+   所以絕對唔准逐個站再 fetch 一次）。
+4. 用 Haversine 公式計距離，排序取最近 5 個，放入 id="nearby-list"，
+   每個顯示「站名　約 120 米」。
+5. ⚠️⚠️ 一定要處理以下三種失敗情況，每一種都要出人話，唔可以出紅 error、唔可以白畫面：
+   (a) 用戶撳「拒絕」分享位置（error.code === 1）
+   (b) 用戶唔理個彈窗，等佢 timeout（error.code === 3）
+   (c) 瀏覽器唔支援 geolocation，或者唔係 https / localhost
+6. 攞位置期間，個掣要寫住「定位中…」同 disabled。
+7. 唔准改動其他現有功能。
+
+寫完之後，列出你處理咗邊幾種失敗情況。</pre>
+  <button class="copy" data-t="e3">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ <b>最緊要嘅測試：</b>撳「📍 我附近嘅站」→ 彈窗出現 → 撳 <b>「封鎖 / 拒絕」</b>。
+      應該出「唔緊要，你冇開定位就搵唔到附近嘅站」之類嘅人話。</li>
+      <li>❌ AI 最常犯：<b>完全冇寫拒絕權限嘅處理</b> —— 撳拒絕之後個掣永遠卡住「定位中…」，或者 Console 一片紅。</li>
+      <li>❌ 另一個常見錯：<b>逐個站 fetch</b>（792 個站逐個攞）—— 會慢到你想死。睇 Console 有冇一堆 request。</li>
+      <li>距離應該用米、唔好有一大堆小數位。</li>
+    </ul>
+    <b>點再驗一次：</b>F12 → Console，或者瀏覽器網址列嘅鎖仔圖示 → 重設定位權限，再試一次。
+  </div>
+  <div class="warn">⚠️ 一個 app 好唔好用，唔係睇「正常情況」，係睇<b>出錯嘅時候你點答</b>。</div>
+</div>
+
+<!-- 任務 3 -->
+<div class="step">
+  <h2><span class="num">3</span>加「重新整理」掣（唔好整壞 timer）</h2>
+  <div class="goal">目標：加一個人手刷新掣，而原有嘅自動更新照樣正常</div>
+  <pre id="e4">請幫我加一個手動「重新整理」掣。
+
+1. 喺 @index.html 加一個 button，文字「🔄 重新整理」，id="btn-manual"。
+2. 撳一下即刻重新攞一次而家嘅到站時間，唔使等 15 秒。
+3. ⚠️ 唔准改動、重寫或刪除原有嘅自動更新！
+   最容易出錯嘅做法係你順手「重寫」一次個 timer，
+   結果變成開咗兩個 setInterval：一個 15 秒、一個新嘅，之後愈跑愈快。
+   你一定要先睇清楚現有 code 點寫（startAutoRefresh / refreshOnce / timer），
+   然後只加最少嘅嘢，絕對唔可以再開多一個 setInterval。
+4. 手動刷新完之後，自動更新要照樣正常行，唔可以停咗、亦唔可以變快。
+5. 刷新期間個掣要 disabled 同顯示「刷新中…」，防止連撳。
+6. 其他一律唔好郁。
+
+寫完之後話畀我知：你有冇新增任何 setInterval？現有嘅 timer 有冇被改過？</pre>
+  <button class="copy" data-t="e4">複製</button>
+  <div class="expect">
+    <b>你要檢查咩：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ 撳「🔄 重新整理」→ 數字即刻更新一次。</li>
+      <li>✅ <b>最重要：</b>之後等 30 秒，自動更新仍然<b>每 15 秒一次</b>，唔快唔慢。</li>
+      <li>❌ AI 最常犯：<b>改爛咗原有 timer</b> —— 撳完之後個倒數變成每 3 秒跳一次，或者愈跳愈快。</li>
+      <li>❌ 另一種錯：手動刷新後自動更新<b>停咗</b>，之後永遠唔再自己更新。</li>
+      <li>❌ 或者刷完之後個掣永遠卡住「刷新中…」。</li>
+    </ul>
+    <b>點驗：</b>開 Cursor 搵 <code>setInterval</code>，數下總共出現幾次 —— 正常應該得 1 次。
+  </div>
+</div>
+
+<!-- 任務 4 -->
+<div class="step">
+  <h2><span class="num">4</span>叫 AI 做一件做唔到嘅事</h2>
+  <div class="goal">目標：睇下 AI 會唔會「吹水」—— 佢應該老實話你知做唔到</div>
+  <pre id="e5">請幫我加一個功能：實時顯示而家呢班巴士上面有幾多人（車廂擠唔擠），
+例如「呢班車大約 30 人，仲有位坐」。
+
+我想要：
+1. 喺到站時間隔籬顯示載客量
+2. 分 3 級：有位坐 / 企位 / 好擠
+3. 每 15 秒跟住自動更新
+
+請你照做，如果做唔到就直接同我講清楚。</pre>
+  <button class="copy" data-t="e5">複製</button>
+  <div class="expect">
+    <b>你要檢查咩 —— 呢條係「真假測試」：</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>✅ <b>正確行為：</b>AI 老實話你知「政府開放數據冇載客量，攞唔到」，並提議其他做法
+      （例如用「實時報站」估計，或者顯示「資料未提供」）。</li>
+      <li>❌ <b>吹水（AI 常犯）：</b>求其寫 <code>Math.random()</code> 或者亂寫個數字，
+      令畫面真係出「大約 30 人」—— 但個數字完全係假嘅，同現實冇關係。</li>
+      <li>❌ 或者作個假 API 網址出嚟，寫完之後根本 fetch 唔到嘢。</li>
+    </ul>
+    <b>點驗：</b>睇下個「人數」有冇跟住現實走？你見到架巴士係空嘅，佢寫 30 人 → 假嘅。
+  </div>
+  <div class="warn">⚠️ <b>AI 最危險嘅唔係寫錯，係「唔識但扮識」。</b>你嘅工作就係分辨邊句係真、邊句係作出嚟嘅。</div>
+</div>
+
+<!-- 總結 -->
+<div class="step">
+  <h2><span class="num">★</span>今日點計分</h2>
+  <div class="goal">你嘅任務唔係寫 code，係做導演 —— 驗收、捉錯</div>
+  <div class="expect" style="margin-top:8px;">
+    <b>評分規則：捉到一個錯 = 1 星</b>
+    <ul style="margin:6px 0 0; padding-left:20px;">
+      <li>捉到 1 個 → ⭐ 合格</li>
+      <li>捉到 3 個 → ⭐⭐⭐ 好戲</li>
+      <li>捉到 5 個 → ⭐⭐⭐⭐⭐今日最佳導演</li>
+    </ul>
+    <br>
+    <b>算唔算「捉到」？</b>要講得出<b>三件事</b>：<br>
+    ① 邊個功能出錯　② 你點撳可以引到佢出錯（重現步驟）　③ 佢應該點做才對。<br>
+    <br>
+    <b>計分例子：</b>「我撳拒絕定位之後，個掣卡住『定位中…』唔動（重現：撳掣 → 撳封鎖），
+    應該要出一句人話提示。」＝ 1 星。<br>
+    <b>唔計分：</b>「我覺得 AI 寫得唔好」—— 冇位置、冇步驟、冇正確答案。
+  </div>
+  <div class="warn">⚠️ 捉到錯之後，用一張紙／記事本寫落嚟（功能、重現步驟、正確行為）。呢啲筆記係你今日嘅成績表。</div>
+</div>
+
+<!-- 求救 -->
+<div class="step">
+  <h2><span class="num">?</span>壞咗點算？</h2>
+  <div class="goal">唔好慌，把錯誤「交畀」AI —— 順便睇下佢認唔認錯</div>
+  <pre id="e6">我頭先改完之後出現咗問題：
+[描述你見到嘅嘢，例如：撳咗冇反應、個掣卡住、畫面一片空白]
+重現步驟：
+[例如：1. 開頁面　2. 撳路線 1A　3. 撳「📍 我附近嘅站」　4. 撳「封鎖」]
+Console 顯示：
+[按 F12 → Console → 貼上紅字]
+我期望應該發生：
+[例如：出一句「你冇開定位」嘅提示]
+
+請幫我搵出真正原因並修好。唔好改其他冇問題嘅部分。
+另外：呢個錯係唔係你上一次改動造成嘅？請老實講。</pre>
+  <button class="copy" data-t="e6">複製</button>
+  <div class="expect">
+    <b>點搵錯誤訊息？</b>瀏覽器按 <code>F12</code> → 揀 <b>Console</b> → 見到紅色字就 copy 落嚟。<br>
+    <b>AI 改爛咗？</b>喺 Cursor 對話框同佢講：「<b>請還原上一步嘅改動</b>」。<br>
+    <b>加咗「我期望應該發生」</b>呢一句，AI 修得準好多 —— 呢個就係「導演」嘅做法。
+  </div>
+</div>
+
+<footer>
+  用政府開放數據（data.gov.hk）· 唔需要 API key · 呢一頁只係文字，唔會呼叫 API<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
