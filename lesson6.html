@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C0713A Prompt 卡 — 香港交通 App</title>
+<title>Lesson 6 · 科學演示（Gemini Canvas）— C0713A</title>
 <style>
   :root {
     --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
@@ -63,31 +63,38 @@
   .backhome:active { color: #fff; }
   footer { color: var(--muted); font-size: 12.5px; text-align: center;
            border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+
+  .chips-label { font-size: 12.5px; color: var(--muted); margin: 12px 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 4px; }
+  button.chip { background: var(--card2); color: var(--fg); border: 1px solid var(--border);
+    border-radius: 999px; padding: 7px 13px; font-size: 13px; font-family: inherit;
+    cursor: pointer; transition: .15s; }
+  button.chip:active { transform: scale(.96); }
+  button.chip.done { background: var(--ok); color: #fff; border-color: var(--ok); }
 </style>
 </head>
 <body>
-<a class="backhome" href="./">← 返主頁</a>
+<a class="backhome" href="https://kelvin0611.github.io/c0713a-prompts/">← 返課程主頁</a>
 
-<h1>Lesson 6 · 科學演示（Gemini Canvas）</h1>
-<div class="sub">用 AI 生成虛擬實驗　·　可愛風格　·　對應初中科學科課程　·　撳「複製」→ 貼落 Gemini</div>
+<h1>科學演示 · Prompt 卡</h1>
+<div class="sub">Gemini Canvas 虛擬實驗　·　可愛風格　·　對應初中科學科課程</div>
 
 <div class="howto">
-  <b>點用 Gemini Canvas？</b>
+  <b>點玩？三個動作：複製 → 閱讀 → 更改</b>
   <ol>
-    <li>開 <b>gemini.google.com</b>（用你嘅 Google 帳號登入）</li>
-    <li>喺輸入框下面揀 <b>「Canvas」</b>（唔係普通對話）</li>
-    <li>撳下面任何一句嘅 <b>「複製」</b> → 貼落 Gemini → 送出</li>
-    <li>Gemini 會喺右邊<b>即時生成一個玩得到嘅網頁</b></li>
-    <li>想改就繼續同佢講（「火焰再大啲」「加啲星星」），佢會即刻更新</li>
+    <li>開 <b>gemini.google.com</b>，喺輸入框下面揀 <b>「Canvas」</b></li>
+    <li>撳<b>大嘅「複製 Prompt」</b> → 貼落 Gemini → 送出（出咗個實驗）</li>
+    <li>然後撳下面嘅 <b>關鍵詞 chip</b>（每個都係一句現成指令）→ 貼落 Gemini 繼續改</li>
   </ol>
-  <p style="margin:10px 0 0"><b>祕訣：</b>一次只改一樣，改完睇下，唔啱再講。呢個就係 Vibe Coding。</p>
+  <p style="margin:10px 0 0"><b>核心玩法：</b>唔係一次做完，係<b>一路撳、一路改、一路睇</b>。
+  每個 chip 都係一句可以即刻貼嘅指令 —— 改到自己滿意為止。</p>
 </div>
 
 <!-- ============ 入門 ============ -->
 <div class="parthead" id="warmup">
   <span class="tagline">PART 0</span>
   <h2>入門：先識用 Canvas</h2>
-  <p>零風險熱身，做一次就明。做完可以直接叫佢改，睇住個效果變。</p>
+  <p>零風險熱身。做完撳下面啲 chip 玩下，你就明個節奏。</p>
 </div>
 
 <div class="step intro">
@@ -101,10 +108,13 @@
 
 全部用 HTML + CSS + JavaScript 寫，唔好用外部 library。
 風格：可愛、圓潤、柔和陰影、動畫要柔順。</pre>
-  <button class="copy" data-t="g0">複製</button>
-  <div class="expect">
-    <b>應該見到：</b>Gemini 右邊出一個玩得到嘅預覽，撳個笑臉有反應。<br>
-    <b>試下改：</b>同佢講「換粉紅色」「笑臉再大啲」—— 睇住佢即刻改。
+  <button class="copy" data-t="g0">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請把整個畫面改成粉藍色系，其他嘢唔好改。">改成粉藍色</button>
+    <button class="chip" data-copy="請把個笑臉換成一隻可愛嘅貓（有耳朵同鬍鬚），撳佢會『喵』一聲。">換成貓</button>
+    <button class="chip" data-copy="請加背景音樂，用 Web Audio API 產生輕鬆嘅音效，唔好用外部檔案。">加背景音樂</button>
+    <button class="chip" data-copy="請加一個『心情選擇』：撳笑臉會隨機轉表情（開心、傷心、驚訝、睡覺）。">加表情變化</button>
   </div>
 </div>
 
@@ -112,7 +122,72 @@
 <div class="parthead" id="main">
   <span class="tagline">PART 1</span>
   <h2>五個虛擬實驗</h2>
-  <p>對應初中科學科課程。每個都可以獨立做，做完可以繼續叫 AI 加嘢。</p>
+  <p>對應初中科學科課程。每個先複製大 prompt，再用 chip 一路改。</p>
+</div>
+
+<div class="step">
+  <h2><span class="num">ALL</span>一次過生成晒五個實驗 🎪</h2>
+  <div class="goal">唔想逐個做？呢個 prompt 會生成<b>一個網頁，入面有五個實驗</b>，上面有目錄可以切換</div>
+  <pre id="gall">請用 Canvas 做一個「可愛科學遊樂場」，一個網頁入面包含五個互動科學實驗，
+全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+【版面】
+- 頂部有 5 個圓潤可愛嘅大按鈕／標籤，切換以下五個實驗（唔使重新載入頁面）
+- 每個實驗都係獨立一個區塊，切換時有柔順嘅淡入動畫
+
+【實驗一：聲音 🔊】
+- 可愛音叉角色，振動時出聲 + 水面波紋
+- 頻率滑桿 20–20000 Hz，即時畫出聲波波形（頻率越高波形越密）
+- 波形可切換：正弦波／方波／三角波／鋸齒波（同一頻率下音色唔同、音高一樣）
+- 介質切換：固體 / 液體 / 空氣 / 真空（真空冇聲）
+- 顯示「Hz 係頻率嘅單位」同「人類聽到 20–20000 Hz」
+
+【實驗二：光合作用 🌱】
+- 可愛盆栽（有表情），太陽可拖動或滑桿調光暗
+- CO₂ 同 H₂O 小角色飄入，氧氣泡泡由葉飄出（光越強泡泡越多）
+- 顯示文字反應式同化學反應式
+- 四項條件開關（光、葉綠素、二氧化碳、水），關掉任何一項就停止
+
+【實驗三：光的反射 · 折射 · 全內反射 🔦】
+- 雷射筆射光線，入射角可調
+- 同時畫出入射線、反射線、折射線（三種顏色）＋ 標示角度
+- 介質可揀：水 / 玻璃 / 鑽石（臨界角 48.8° / 41.8° / 24.4°）
+- 入射角超過臨界角 → 出「全內反射！」特效，折射線消失
+- 顯示斯涅爾定律 n₁sinθ₁ = n₂sinθ₂ 並代入數字
+
+【實驗四：眼睛與透鏡成像 👁️】
+- 可愛眼睛剖面圖（角膜、瞳孔、晶狀體、視網膜、視神經）
+- 可拖動物件 + 光線圖顯示聚焦過程
+- 切換正常眼 / 近視眼 / 遠視眼；近視遠視時畫面用 CSS blur 變模糊
+- 「戴眼鏡」按鈕：加正確鏡片後畫面變清（近視用凹透鏡、遠視用凸透鏡）
+
+【實驗五：焰色反應 🔥】
+- 可愛本生燈，揀元素（鈉鉀鈣銅鍶鋇鋰）火焰變真色
+- 鈉金黃、鉀淡紫、鈣磚紅、銅藍綠、鍶深紅、鋇黃綠、鋰洋紅
+- 加一個小測驗：隨機出焰色，估係咩元素
+
+【風格】（重點）
+- 粉彩色：粉紅 #FFB3C6、粉藍 #A8DADC、薄荷綠 #B8E6D5、淡黃 #FFE9A8
+- 所有元素圓潤：大圓角、粗邊框（3px）、柔和陰影
+- 動畫柔順（CSS transition），唔好突然跳
+- 少量 emoji：🔊 🌱 🔦 👁️ 🔥 ✨
+- 整體感覺：似小朋友嘅玩具 app，唔係教科書
+
+【額外】
+- 手機同電腦都要睇得靚（responsive）
+- 每個實驗都要有一句「呢個實驗學緊咩」（用中學生聽得明嘅講法）</pre>
+  <button class="copy" data-t="gall">複製 Prompt</button>
+  <div class="chips-label">👇 生成完之後，可以用呢啲 chip 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請幫每個實驗加入「小測驗」，隨機出 3 條問題，答對有星星。">每個實驗加小測驗</button>
+    <button class="chip" data-copy="請加一個「老師模式」開關：開啟後會顯示每個實驗對應嘅課程單元同學習重點。">加老師模式</button>
+    <button class="chip" data-copy="請把五個實驗嘅內容整理成一份可以印嘅學習筆記（一頁一實驗，有重點同圖解）。">整理成筆記</button>
+    <button class="chip" data-copy="請加背景音樂，用 Web Audio API 生成輕鬆嘅音效循環，唔好用外部檔案。">加背景音樂</button>
+  </div>
+  <div class="expect">
+    <b>應該見到：</b>一個網頁，頂部五個掣，撳落去切換五個實驗。<br>
+    ⚠️ <b>如果一次生成太多，有啲實驗做得唔靚</b> → 冇問題，逐個叫佢改善就得（例如「實驗三嘅光線唔夠清楚，請重做」）。
+  </div>
 </div>
 
 <!-- 1 聲音 -->
@@ -123,20 +198,35 @@
 
 要有：
 1. 一個可愛嘅音叉角色（有眼睛），撳佢會振動並出聲
-2. 振動嘅音叉**輕觸水面**會產生一圈圈波紋（動畫）
+2. 振動嘅音叉輕觸水面會產生一圈圈波紋（動畫）
 3. 用 canvas 即時畫出聲波波形 —— 頻率越高，波形越密
+   ⚠️ 波形要有得揀：正弦波（圓滑）／方波／三角波／鋸齒波
 4. 一個圓潤嘅大滑桿調校頻率，由 20 Hz 到 20000 Hz
 5. 顯示頻率數值，並講明「Hz 係頻率嘅單位」；同時顯示「人類聽到嘅範圍約 20-20000 Hz」，
    當滑到人耳聽唔到嘅範圍，出提示「呢個頻率人耳聽唔到（超聲波／次聲波）」
-6. 三個場景切換示範「介質」：固體 / 液體 / 空氣 / 真空 —— 真空嘅時候聲音完全傳唔到，
+6. 場景切換示範「介質」：固體 / 液體 / 空氣 / 真空 —— 真空嗰陣聲音完全傳唔到，
    出「真空中冇聲！」並顯示一個呆咗嘅表情
 7. 一個「樂器」小區：鋼琴、鼓、結他，撳落去示範唔同樂器點樣產生聲音
+8. 一個「波形實驗室」：同一頻率下可以切換四種波形（正弦／方波／三角／鋸齒），
+   波形圖即時變形，聲音嘅音色亦跟住變 —— 但音高一樣。
+   要出一句解釋：「音高由頻率決定，音色由波形決定」
 
 風格：粉彩色（粉紅、粉藍、薄荷綠、淡黃）、粗邊框、圓角、柔和陰影、emoji（🔊🎵✨）、動畫柔順。</pre>
-  <button class="copy" data-t="g1">複製</button>
+  <button class="copy" data-t="g1">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請加一個「波形實驗室」：同一頻率下可以切換正弦波、方波、三角波、鋸齒波四種波形。波形圖要即時變形，聲音嘅音色亦要跟住變（但音高一樣）。每個波形要有一粒可愛嘅圖示，同埋一句「呢種波形聽落係咩感覺」。">加波形形狀（正弦／方／三角／鋸齒）</button>
+    <button class="chip" data-copy="請用四格並列比較四種波形，並且可以一次過播放四個（或者順序播）去聽音色差別。">四波形對比</button>
+    <button class="chip" data-copy="請加一個「頻率 × 波形」二維對照表：同一波形、唔同頻率；同一頻率、唔同波形。要一眼睇得出「頻率改音高、波形改音色」。">頻率 × 波形對照</button>
+    <button class="chip" data-copy="請加一個「樂器音色」示範：用唔同波形模擬鋼琴、長笛、小提琴嘅音色，並解釋真實樂器係幾種波形混合而成。">樂器音色</button>
+    <button class="chip" data-copy="請加一個耳嘅剖面圖，用動畫示範聲波由外耳傳到耳膜、再傳到耳蝸。">加耳嘅結構</button>
+    <button class="chip" data-copy="請加一區「唔同動物聽到嘅範圍」，用圖表比較狗、貓、蝙蝠同人類。">動物聽覺比較</button>
+    <button class="chip" data-copy="請加一個「噪音警告」：當 dB 超過 85，出警告話長時間會損害聽覺。">噪音警告</button>
+    <button class="chip" data-copy="請再可愛啲：圓啲、粉彩色、加柔和陰影同彈跳動畫，加多啲 emoji。">再可愛啲</button>
+  </div>
   <div class="expect">
     <b>應該見到：</b>拖頻率滑桿 → 波形疏密變、聲音高低變；切去真空 → 冇聲。<br>
-    <b>可以追問：</b>「加埋分貝（dB）同音量」「加埋耳嘅結構圖，睇下聲波點樣傳入耳蝸」。
+    <b>自己加嘢：</b>諗到咩都可以打落 Gemini，唔一定要用 chip。
   </div>
 </div>
 
@@ -150,7 +240,7 @@
 1. 一棵可愛盆栽（用 CSS 砌，有眼睛同微笑），會微微擺動
 2. 一個太陽可以拖動，或用滑桿調光暗（由夜晚到猛烈太陽）
 3. 小角色分子飄入去：二氧化碳 CO₂（灰色）同水 H₂O（藍色），要有表情
-4. 完整顯示**文字反應式**同**化學反應式**：
+4. 完整顯示文字反應式同化學反應式：
    二氧化碳 ＋ 水 —（光和葉綠素）→ 葡萄糖 ＋ 氧
    6CO₂ ＋ 6H₂O —（光和葉綠素）→ C₆H₁₂O₆ ＋ 6O₂
 5. 氧氣泡泡由葉飄出，光越強 → 泡泡越多越快
@@ -160,10 +250,18 @@
 8. 計數器：「製造咗 N 個氧氣泡」
 
 風格：粉彩色、圓潤、粗邊框、柔和陰影、emoji（🌱☀️💧🫧🧪）、動畫柔順。</pre>
-  <button class="copy" data-t="g2">複製</button>
+  <button class="copy" data-t="g2">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請加一個「呼吸作用」對比模式，示範植物同動物點樣吸入氧氣、放出二氧化碳。">加呼吸作用</button>
+    <button class="chip" data-copy="請加一個夜晚模式，示範植物喺冇光嘅時候淨係進行呼吸作用，放出二氧化碳。">夜晚模式</button>
+    <button class="chip" data-copy="請加一個「桑基圖（Sankey diagram）」，示範光能點樣轉換成食物嘅化學能。">加能量流圖</button>
+    <button class="chip" data-copy="請加一個計時器，示範光合作用同呼吸作用嘅相對速率點樣影響植物嘅淨氣體交換。">淨氣體交換</button>
+    <button class="chip" data-copy="請加一個「食物鏈」小動畫：植物（生產者）→ 動物（消費者）。">加食物鏈</button>
+  </div>
   <div class="expect">
-    <b>應該見到：</b>關掉「光」或「二氧化碳」→ 泡泡停；拖光暗 → 泡泡數量即時變。<br>
-    <b>可以追問：</b>「加埋呼吸作用對比」「加一個夜晚模式，示範植物夜晚淨放出二氧化碳」。
+    <b>應該見到：</b>關掉「光」或「二氧化碳」→ 泡泡停；拖光暗 → 泡泡即時變。<br>
+    <b>考自己：</b>點解夜晚放嘅氣體唔同？
   </div>
 </div>
 
@@ -180,16 +278,24 @@
 4. 同時畫出三條線（唔同顏色）：入射線、反射線、折射線
 5. 標示入射角、反射角、折射角（弧形箭頭 ＋ 度數）
 6. 顯示斯涅爾定律 n₁ sin θ₁ = n₂ sin θ₂，並代入實際數字計算
-7. 當入射角超過臨界角 → 出「全內反射！」特效（折射線消失、反射線變粗、加星星）
-   並用一句話講清楚**全內反射嘅條件**：光由光密介質射向光疏介質、入射角大於臨界角
+7. 當入射角超過臨界角 → 出「全內反射！」特效（折射線消失、反射線變粗、加星星），
+   並用一句話講清楚全內反射嘅條件：光由光密介質射向光疏介質、入射角大於臨界角
 8. 顯示每個介質嘅臨界角（水 48.8°、玻璃 41.8°、鑽石 24.4°）
 9. 一個「日常例子」區：光纖、內窺鏡、鑽石閃爍、水中筷子看似折曲
 
 風格：粉彩色、圓潤、光線要有表情、星星閃、動畫柔順、emoji（🔦✨💎）。</pre>
-  <button class="copy" data-t="g3">複製</button>
+  <button class="copy" data-t="g3">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請加一個光纖動畫：光喺光纖入面不斷全內反射，彈嚟彈去到另一端。">光纖動畫</button>
+    <button class="chip" data-copy="請加一個內窺鏡應用示範，睇下醫生點樣用光纖睇病人身體內部。">內窺鏡應用</button>
+    <button class="chip" data-copy="請加一個水槽示範：一支筷子插入水中，睇落好似折斷咗，並解釋呢個係折射造成。">筷子折曲</button>
+    <button class="chip" data-copy="請加一個潛望鏡示範（兩塊鏡、兩次反射），對應課程嘅三稜鏡潛望鏡活動。">加潛望鏡</button>
+    <button class="chip" data-copy="請加一個鏡子反射示範，並顯示反射定律（入射角 = 反射角）。">加反射定律</button>
+  </div>
   <div class="expect">
     <b>應該見到：</b>由水轉鑽石 → 臨界角變細；入射角過臨界角 → 折射線消失。<br>
-    <b>可以追問：</b>「加埋光纖動畫，示範光點樣喺光纖入面彈嚟彈去」「解釋點解鑽石會閃」。
+    <b>課程連結：</b>呢個對應課本嘅「半圓玻璃塊 ＋ 光線箱」實驗。
   </div>
 </div>
 
@@ -203,81 +309,90 @@
 1. 一對可愛嘅眼睛（有眼睫毛、瞳孔、會眨眼）
 2. 眼睛剖面圖：標示角膜、瞳孔、晶狀體、視網膜、視神經（用可愛風標籤）
 3. 一個可以拖動嘅物件（例如一朵花 🌸），放喺眼睛前面唔同距離
-4. **光線圖**：光線由物件頂部射出，經過晶狀體折射，會聚到視網膜
+4. 光線圖：光線由物件頂部射出，經過晶狀體折射，會聚到視網膜
 5. 滑桿調整：物件距離、晶狀體焦距（模擬眼睛調節）
 6. 即時顯示成像性質：倒立、放大／縮小、實像
 7. 切換三種情況：
    - 正常眼 → 焦點啱啱喺視網膜
-   - 近視眼（眼球太長）→ 焦點喺視網膜前面，畫面用 CSS blur 變模糊，顯示要用**凹透鏡**矯正
-   - 遠視眼（眼球太短）→ 焦點喺視網膜後面，同樣模糊，顯示要用**凸透鏡**矯正
+   - 近視眼（眼球太長）→ 焦點喺視網膜前面，畫面用 CSS blur 變模糊，顯示要用凹透鏡矯正
+   - 遠視眼（眼球太短）→ 焦點喺視網膜後面，同樣模糊，顯示要用凸透鏡矯正
 8. 一個「戴眼鏡」按鈕：撳落去加上正確鏡片，畫面即時變清
-9. 一個示範：**看近處物件同遠處物件時，晶狀體嘅形狀有咩唔同**（會變厚／變薄）
+9. 一個示範：看近處物件同遠處物件時，晶狀體嘅形狀有咩唔同（會變厚／變薄）
 
 風格：粉彩色、圓潤、可愛有表情、emoji（👁️🌸🔍👓）、動畫柔順。</pre>
-  <button class="copy" data-t="g4">複製</button>
+  <button class="copy" data-t="g4">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請加埋放大鏡同顯微鏡，示範凸透鏡點樣用嚟放大物件。">加放大鏡／顯微鏡</button>
+    <button class="chip" data-copy="請加一個相機對比：示範相機點樣用凸透鏡喺底片／感光元件上造成倒立嘅實像。">相機成像對比</button>
+    <button class="chip" data-copy="請加一個「視網膜感光細胞」區：示範視桿細胞（暗光）同視錐細胞（顏色）嘅分別。">感光細胞</button>
+    <button class="chip" data-copy="請加一個「盲點測試」小遊戲：兩點慢慢移近，睇下學生搵唔搵到盲點。">盲點測試</button>
+    <button class="chip" data-copy="請加一個「保護眼睛」提示區：示範長時間睇屏幕、光線不足對眼睛嘅影響。">護眼提示</button>
+  </div>
   <div class="expect">
     <b>應該見到：</b>拖物件 → 焦點位置郁；切近視 → 焦點喺前面、畫面模糊；戴眼鏡 → 變清。<br>
-    <b>可以追問：</b>「加埋放大鏡同顯微鏡」「解釋點解相機成像係倒立」。
+    <b>考自己：</b>點解近視要戴凹透鏡、遠視要戴凸透鏡？
   </div>
 </div>
 
 <!-- 5 焰色（延伸） -->
 <div class="step">
   <h2><span class="num">5</span>焰色反應 🔥 <span class="muted" style="font-size:12px">（延伸）</span></h2>
-  <div class="goal">⚠️ 呢個<b>唔喺初中科學科課程</b>（係高中化學），當作趣味延伸實驗</div>
+  <div class="goal">⚠️ 呢個<b>唔喺初中科學科課程</b>（屬高中化學），當作趣味延伸實驗</div>
   <pre id="g5">請用 Canvas 做一個「可愛化學實驗室：焰色測試」互動網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
 
 要有：
 1. 一個可愛嘅本生燈（有眼睛），火焰會微微跳動
 2. 一排可以揀嘅元素按鈕：鈉 Na、鉀 K、鈣 Ca、銅 Cu、鍶 Sr、鋇 Ba、鋰 Li
 3. 撳一個元素 → 一條鉑絲沾咗嗰個元素放入火焰 → 火焰變成該元素真實嘅焰色：
-   - 鈉 Na → 金黃色
-   - 鉀 K → 淡紫色
-   - 鈣 Ca → 磚紅色
-   - 銅 Cu → 藍綠色
-   - 鍶 Sr → 深紅色
-   - 鋇 Ba → 黃綠色
-   - 鋰 Li → 洋紅色
+   鈉 Na → 金黃色｜鉀 K → 淡紫色｜鈣 Ca → 磚紅色｜銅 Cu → 藍綠色
+   鍶 Sr → 深紅色｜鋇 Ba → 黃綠色｜鋰 Li → 洋紅色
 4. 火焰顏色要平滑過渡，並有火焰跳動動畫
 5. 顯示元素名、符號、同焰色嘅中文名稱
 6. 一個「小測驗」模式：隨機出一個焰色，叫學生估係咩元素，答對有星星
-7. 一個「冷知識」區：講下焰色測試用嚟鑑定金屬離子，同埋煙花嘅顏色就係用呢個原理
+7. 一個「冷知識」區：焰色測試用嚟鑑定金屬離子，煙花嘅顏色就係用呢個原理
 
 風格：粉彩色底、火焰用真色、圓潤、粗邊框、emoji（🔥🧪✨）、動畫柔順。</pre>
-  <button class="copy" data-t="g5">複製</button>
+  <button class="copy" data-t="g5">複製 Prompt</button>
+  <div class="chips-label">👇 撳一下就複製，貼落 Gemini 繼續改：</div>
+  <div class="chips">
+    <button class="chip" data-copy="請加一個煙花示範：用呢啲元素嘅焰色砌成一場煙花匯演。">加煙花示範</button>
+    <button class="chip" data-copy="請加安全提示區：講清楚真實做焰色測試要做嘅安全措施（護目鏡、通風、本生燈用法）。">加安全提示</button>
+    <button class="chip" data-copy="請加一個「點解鈉嘅黃色會蓋過其他顏色」嘅解釋區，並示範用藍色鈷玻璃濾走鈉嘅黃光。">鈉蓋色問題</button>
+    <button class="chip" data-copy="請用呢啲元素整一個記憶遊戲，幫學生記住每隻元素嘅焰色。">焰色記憶遊戲</button>
+  </div>
   <div class="expect">
     <b>應該見到：</b>撳唔同元素，火焰即時轉色。<br>
-    <b>可以追問：</b>「加埋煙花示範」「解釋點解鈉嘅黃色會蓋過其他顏色」。
+    <b>⚠️ 記住：</b>呢個只係模擬。真實做要老師示範 ＋ 安全措施。
   </div>
 </div>
 
-<!-- 求救 -->
+<!-- 通用 chips -->
 <div class="step">
-  <h2><span class="num">?</span>做唔到點算？</h2>
-  <div class="goal">唔靚、唔啱、冇反應 —— 都係繼續同佢講就得</div>
+  <h2><span class="num">★</span>通用改造 chip</h2>
+  <div class="goal">任何一個實驗都可以用 —— 唔使背，撳一下就複製</div>
 
-  <p class="mini">A · 出嚟嘅嘢唔夠可愛</p>
-  <pre id="g6">個效果出咗，但係唔夠可愛。
-請你改成：圓啲、用粉彩色、加柔和陰影同圓角、動畫柔順啲，
-再加少少 emoji。其他嘢唔好改。</pre>
-  <button class="copy" data-t="g6">複製</button>
+  <p class="mini">🎨 外觀</p>
+  <div class="chips">
+    <button class="chip" data-copy="請再可愛啲：圓啲、粉彩色、柔和陰影同圓角、動畫柔順啲，加多啲 emoji。其他嘢唔好改。">再可愛啲</button>
+    <button class="chip" data-copy="請改成深色（夜晚）主題，但保持可愛風格。">加深色模式</button>
+    <button class="chip" data-copy="請加大字體同大按鈕，方便用手機或者投影機睇。">字體加大</button>
+    <button class="chip" data-copy="請加柔順嘅轉場動畫（transition），所有變化都要平滑，唔好突然跳。">動畫柔順啲</button>
+  </div>
 
-  <p class="mini">B · 科學原理唔啱</p>
-  <pre id="g7">我覺得個原理有啲唔啱：
-[寫出你覺得錯嘅地方，例如：呢度折射角應該大過入射角]
-請你核對一次，同埋解釋正確嘅科學原理係點，然後改好個模擬。
-如果係初中科學科課程嘅內容，請用課程嘅講法（例如：全內反射嘅條件）。</pre>
-  <button class="copy" data-t="g7">複製</button>
+  <p class="mini">🧠 學習</p>
+  <div class="chips">
+    <button class="chip" data-copy="請加一個「小測驗」區：隨機出 3 條同呢個實驗有關嘅問題，答啱有星星。">加小測驗</button>
+    <button class="chip" data-copy="請用中學生聽得明嘅講法，解釋呢個實驗背後嘅科學原理，並用一個日常例子。">加原理解釋</button>
+    <button class="chip" data-copy="請加一個「預測先，再驗證」環節：叫學生先估結果，撳掣之後才顯示答案。">加預測環節</button>
+    <button class="chip" data-copy="請加英文對照（中英雙語標籤），方便學生學科學英文詞彙。">加中英對照</button>
+  </div>
 
-  <p class="mini">C · 完全冇反應 / 一片空白</p>
-  <pre id="g8">個預覽係一片空白，冇任何嘢出。
-請你檢查一次整個程式碼，搵出錯誤並修好。
-如果係因為用咗外部 library 而載入唔到，請改成純 HTML + CSS + JavaScript 重寫。</pre>
-  <button class="copy" data-t="g8">複製</button>
-
-  <div class="expect">
-    <b>做得好嘅話：</b>叫佢「幫我寫低呢個實驗嘅原理說明」—— 順便學埋科學。<br>
-    <b>最終目標：</b>你唔止識用 AI，你仲識<b>判斷 AI 寫嘅科學對唔對</b>。
+  <p class="mini">🛠️ 出問題嗰陣</p>
+  <div class="chips">
+    <button class="chip" data-copy="個預覽係一片空白，冇任何嘢出。請你檢查整個程式碼，搵出錯誤並修好。如果係外部 library 載入唔到，請改成純 HTML + CSS + JavaScript 重寫。">一片空白</button>
+    <button class="chip" data-copy="我覺得個科學原理有啲唔啱：[寫出你覺得錯嘅地方]。請你核對一次，解釋正確原理，然後改好個模擬。">原理唔啱</button>
+    <button class="chip" data-copy="請你把而家嘅完整程式碼同埋一段說明，整理成一份可以交嘅學習筆記。">整理成筆記</button>
   </div>
 </div>
 
@@ -287,5 +402,52 @@
   C0713A　AI Vibe Coding　·　2026
 </footer>
 
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = document.getElementById(btn.dataset.t).textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "✓ 複製咗！";
+      btn.classList.add("done");
+      setTimeout(function () {
+        btn.textContent = old;
+        btn.classList.remove("done");
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+});
+
+function fallback(text, done) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { alert("請手動長按選取文字複製"); }
+  document.body.removeChild(ta);
+}
+
+document.querySelectorAll("button[data-copy]").forEach(function (chip) {
+  chip.addEventListener("click", function () {
+    var text = chip.getAttribute("data-copy");
+    var done = function () {
+      var old = chip.textContent;
+      chip.textContent = "\u2713 \u8907\u88FD\u54D7\uFF01";
+      chip.classList.add("done");
+      setTimeout(function () { chip.textContent = old; chip.classList.remove("done"); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else { fallback(text, done); }
+  });
+});
+</script>
 </body>
 </html>
