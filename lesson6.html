@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C0713A Prompt 卡 — 香港交通 App</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #191d24; --card2: #222731; --fg: #e8eaed;
+    --muted: #9aa3b2; --accent: #e1252e; --ok: #34c759; --border: #2d3340;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: -apple-system, "PingFang HK", "Noto Sans HK", system-ui, sans-serif;
+         line-height: 1.6; padding: 16px 14px 60px; max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           padding: 12px 14px; margin-bottom: 22px; font-size: 14.5px; }
+  .howto b { color: #fff; }
+  .howto ol { margin: 8px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 4px; }
+  .step { background: var(--card); border: 1px solid var(--border);
+          border-radius: 14px; padding: 14px; margin-bottom: 18px; }
+  .step h2 { font-size: 17px; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .num { background: var(--accent); color: #fff; font-size: 12px; font-weight: 800;
+         width: 22px; height: 22px; border-radius: 50%; display: inline-flex;
+         align-items: center; justify-content: center; flex: 0 0 auto; }
+  .goal { color: var(--muted); font-size: 13.5px; margin: 6px 0 10px; }
+  /* ── PART 分隔標題 ── */
+  .parthead { margin: 32px 0 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .parthead .tagline { display: inline-block; background: #2b6cb0; color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 5px; margin-bottom: 7px; }
+  .parthead h2 { font-size: 19px; margin: 0 0 4px; }
+  .parthead p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  /* ── 入門卡（藍色，同主線分開）── */
+  .step.intro { border-color: #2b6cb0; background: #161d29; }
+  .step.intro .num { background: #2b6cb0; width: auto; min-width: 22px; padding: 0 7px;
+    border-radius: 11px; font-size: 11.5px; }
+  .step.intro pre { border-left-color: #4a90d9; }
+  .step.intro button.copy { background: #2b6cb0; }
+  .step.intro button.copy.done { background: var(--ok); }
+  .mini { font-size: 12.5px; color: var(--muted); margin: 14px 0 5px; font-weight: 600; }
+  pre { background: #0b0d11; border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: 8px; padding: 11px 12px; margin: 0 0 9px;
+        white-space: pre-wrap; word-break: break-word;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
+        line-height: 1.55; color: #dfe3ea; }
+  button.copy { width: 100%; background: var(--accent); color: #fff; border: 0;
+                border-radius: 9px; padding: 11px; font-size: 15px; font-weight: 700;
+                font-family: inherit; cursor: pointer; transition: .15s; }
+  button.copy:active { transform: scale(.98); }
+  button.copy.done { background: var(--ok); }
+  .expect { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+  .expect b { color: #fff; }
+  .expect code { background: var(--card2); padding: 1px 5px; border-radius: 4px;
+                 font-size: 12.5px; }
+  .warn { background: #2a1a1c; border: 1px solid #5a2a2e; border-radius: 8px;
+          padding: 9px 11px; margin-top: 10px; font-size: 13px; color: #ffd7d9; }
+  .backhome { display: inline-block; color: var(--muted); text-decoration: none;
+              font-size: 14px; margin-bottom: 12px; }
+  .backhome:active { color: #fff; }
+  footer { color: var(--muted); font-size: 12.5px; text-align: center;
+           border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px; }
+</style>
+</head>
+<body>
+<a class="backhome" href="./">← 返主頁</a>
+
+<h1>Lesson 6 · 科學演示（Gemini Canvas）</h1>
+<div class="sub">用 AI 生成虛擬實驗　·　可愛風格　·　對應初中科學科課程　·　撳「複製」→ 貼落 Gemini</div>
+
+<div class="howto">
+  <b>點用 Gemini Canvas？</b>
+  <ol>
+    <li>開 <b>gemini.google.com</b>（用你嘅 Google 帳號登入）</li>
+    <li>喺輸入框下面揀 <b>「Canvas」</b>（唔係普通對話）</li>
+    <li>撳下面任何一句嘅 <b>「複製」</b> → 貼落 Gemini → 送出</li>
+    <li>Gemini 會喺右邊<b>即時生成一個玩得到嘅網頁</b></li>
+    <li>想改就繼續同佢講（「火焰再大啲」「加啲星星」），佢會即刻更新</li>
+  </ol>
+  <p style="margin:10px 0 0"><b>祕訣：</b>一次只改一樣，改完睇下，唔啱再講。呢個就係 Vibe Coding。</p>
+</div>
+
+<!-- ============ 入門 ============ -->
+<div class="parthead" id="warmup">
+  <span class="tagline">PART 0</span>
+  <h2>入門：先識用 Canvas</h2>
+  <p>零風險熱身，做一次就明。做完可以直接叫佢改，睇住個效果變。</p>
+</div>
+
+<div class="step intro">
+  <h2><span class="num">A</span>第一個 Canvas 作品</h2>
+  <div class="goal">目標：見到 Gemini 即時生成一個可以撳嘅網頁</div>
+  <pre id="g0">請用 Canvas 幫我做一個可愛嘅小網頁：
+
+- 中央有一個圓形嘅可愛笑臉（有眼睛、有微笑、有腮紅）
+- 撳佢一下，佢會彈跳一下，並出一句隨機鼓勵說話（例如「你好叻！」「繼續加油！」）
+- 背景係粉彩色漸變，有幾粒慢慢飄浮嘅星星
+
+全部用 HTML + CSS + JavaScript 寫，唔好用外部 library。
+風格：可愛、圓潤、柔和陰影、動畫要柔順。</pre>
+  <button class="copy" data-t="g0">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>Gemini 右邊出一個玩得到嘅預覽，撳個笑臉有反應。<br>
+    <b>試下改：</b>同佢講「換粉紅色」「笑臉再大啲」—— 睇住佢即刻改。
+  </div>
+</div>
+
+<!-- ============ 五個實驗 ============ -->
+<div class="parthead" id="main">
+  <span class="tagline">PART 1</span>
+  <h2>五個虛擬實驗</h2>
+  <p>對應初中科學科課程。每個都可以獨立做，做完可以繼續叫 AI 加嘢。</p>
+</div>
+
+<!-- 1 聲音 -->
+<div class="step">
+  <h2><span class="num">1</span>聲音 🔊</h2>
+  <div class="goal">課程：單元十 10.3 聽覺 —— 聲音由<b>振動</b>產生、藉<b>介質</b>傳送、用 <b>Hz</b> 量度頻率</div>
+  <pre id="g1">請用 Canvas 做一個「可愛聲音實驗室」互動網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+要有：
+1. 一個可愛嘅音叉角色（有眼睛），撳佢會振動並出聲
+2. 振動嘅音叉**輕觸水面**會產生一圈圈波紋（動畫）
+3. 用 canvas 即時畫出聲波波形 —— 頻率越高，波形越密
+4. 一個圓潤嘅大滑桿調校頻率，由 20 Hz 到 20000 Hz
+5. 顯示頻率數值，並講明「Hz 係頻率嘅單位」；同時顯示「人類聽到嘅範圍約 20-20000 Hz」，
+   當滑到人耳聽唔到嘅範圍，出提示「呢個頻率人耳聽唔到（超聲波／次聲波）」
+6. 三個場景切換示範「介質」：固體 / 液體 / 空氣 / 真空 —— 真空嘅時候聲音完全傳唔到，
+   出「真空中冇聲！」並顯示一個呆咗嘅表情
+7. 一個「樂器」小區：鋼琴、鼓、結他，撳落去示範唔同樂器點樣產生聲音
+
+風格：粉彩色（粉紅、粉藍、薄荷綠、淡黃）、粗邊框、圓角、柔和陰影、emoji（🔊🎵✨）、動畫柔順。</pre>
+  <button class="copy" data-t="g1">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>拖頻率滑桿 → 波形疏密變、聲音高低變；切去真空 → 冇聲。<br>
+    <b>可以追問：</b>「加埋分貝（dB）同音量」「加埋耳嘅結構圖，睇下聲波點樣傳入耳蝸」。
+  </div>
+</div>
+
+<!-- 2 光合作用 -->
+<div class="step">
+  <h2><span class="num">2</span>光合作用 🌱</h2>
+  <div class="goal">課程：單元七 —— 條件（光／葉綠素／二氧化碳／水）、產物（葡萄糖→澱粉 ＋ 氧）</div>
+  <pre id="g2">請用 Canvas 做一個「可愛植物光合作用」互動模擬網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+要有：
+1. 一棵可愛盆栽（用 CSS 砌，有眼睛同微笑），會微微擺動
+2. 一個太陽可以拖動，或用滑桿調光暗（由夜晚到猛烈太陽）
+3. 小角色分子飄入去：二氧化碳 CO₂（灰色）同水 H₂O（藍色），要有表情
+4. 完整顯示**文字反應式**同**化學反應式**：
+   二氧化碳 ＋ 水 —（光和葉綠素）→ 葡萄糖 ＋ 氧
+   6CO₂ ＋ 6H₂O —（光和葉綠素）→ C₆H₁₂O₆ ＋ 6O₂
+5. 氧氣泡泡由葉飄出，光越強 → 泡泡越多越快
+6. 一個「條件檢查表」，四項（光、葉綠素、二氧化碳、水）可以撳掣開關；
+   任何一項關掉 → 光合作用停止，植物出「做唔到光合作用…」表情
+7. 一個「澱粉測試」按鈕：示範用碘液檢測葉有冇澱粉，有澱粉會變藍黑色
+8. 計數器：「製造咗 N 個氧氣泡」
+
+風格：粉彩色、圓潤、粗邊框、柔和陰影、emoji（🌱☀️💧🫧🧪）、動畫柔順。</pre>
+  <button class="copy" data-t="g2">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>關掉「光」或「二氧化碳」→ 泡泡停；拖光暗 → 泡泡數量即時變。<br>
+    <b>可以追問：</b>「加埋呼吸作用對比」「加一個夜晚模式，示範植物夜晚淨放出二氧化碳」。
+  </div>
+</div>
+
+<!-- 3 光的反射折射全內反射 -->
+<div class="step">
+  <h2><span class="num">3</span>光的反射 · 折射 · 全內反射 🔦</h2>
+  <div class="goal">課程：單元十四 14.2–14.4 —— <b>光線圖</b>、反射定律、折射、<b>全內反射的條件</b></div>
+  <pre id="g3">請用 Canvas 做一個「可愛光線歷險記」互動網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+要有：
+1. 一個可愛嘅光線角色（有眼睛嘅小圓點，拖住發光尾巴）
+2. 一塊半透明介質（水 / 玻璃 / 鑽石），可以揀
+3. 一支雷射筆射光線，入射角用滑桿或拖動調校
+4. 同時畫出三條線（唔同顏色）：入射線、反射線、折射線
+5. 標示入射角、反射角、折射角（弧形箭頭 ＋ 度數）
+6. 顯示斯涅爾定律 n₁ sin θ₁ = n₂ sin θ₂，並代入實際數字計算
+7. 當入射角超過臨界角 → 出「全內反射！」特效（折射線消失、反射線變粗、加星星）
+   並用一句話講清楚**全內反射嘅條件**：光由光密介質射向光疏介質、入射角大於臨界角
+8. 顯示每個介質嘅臨界角（水 48.8°、玻璃 41.8°、鑽石 24.4°）
+9. 一個「日常例子」區：光纖、內窺鏡、鑽石閃爍、水中筷子看似折曲
+
+風格：粉彩色、圓潤、光線要有表情、星星閃、動畫柔順、emoji（🔦✨💎）。</pre>
+  <button class="copy" data-t="g3">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>由水轉鑽石 → 臨界角變細；入射角過臨界角 → 折射線消失。<br>
+    <b>可以追問：</b>「加埋光纖動畫，示範光點樣喺光纖入面彈嚟彈去」「解釋點解鑽石會閃」。
+  </div>
+</div>
+
+<!-- 4 眼睛 + 透鏡成像 -->
+<div class="step">
+  <h2><span class="num">4</span>眼睛與透鏡成像 👁️</h2>
+  <div class="goal">課程：單元十 10.2 視覺 ＋ 單元十四 14.5／14.6 —— 晶狀體、視網膜、凸透鏡會聚、凹透鏡發散</div>
+  <pre id="g4">請用 Canvas 做一個「可愛眼睛睇嘢」互動網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+要有：
+1. 一對可愛嘅眼睛（有眼睫毛、瞳孔、會眨眼）
+2. 眼睛剖面圖：標示角膜、瞳孔、晶狀體、視網膜、視神經（用可愛風標籤）
+3. 一個可以拖動嘅物件（例如一朵花 🌸），放喺眼睛前面唔同距離
+4. **光線圖**：光線由物件頂部射出，經過晶狀體折射，會聚到視網膜
+5. 滑桿調整：物件距離、晶狀體焦距（模擬眼睛調節）
+6. 即時顯示成像性質：倒立、放大／縮小、實像
+7. 切換三種情況：
+   - 正常眼 → 焦點啱啱喺視網膜
+   - 近視眼（眼球太長）→ 焦點喺視網膜前面，畫面用 CSS blur 變模糊，顯示要用**凹透鏡**矯正
+   - 遠視眼（眼球太短）→ 焦點喺視網膜後面，同樣模糊，顯示要用**凸透鏡**矯正
+8. 一個「戴眼鏡」按鈕：撳落去加上正確鏡片，畫面即時變清
+9. 一個示範：**看近處物件同遠處物件時，晶狀體嘅形狀有咩唔同**（會變厚／變薄）
+
+風格：粉彩色、圓潤、可愛有表情、emoji（👁️🌸🔍👓）、動畫柔順。</pre>
+  <button class="copy" data-t="g4">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>拖物件 → 焦點位置郁；切近視 → 焦點喺前面、畫面模糊；戴眼鏡 → 變清。<br>
+    <b>可以追問：</b>「加埋放大鏡同顯微鏡」「解釋點解相機成像係倒立」。
+  </div>
+</div>
+
+<!-- 5 焰色（延伸） -->
+<div class="step">
+  <h2><span class="num">5</span>焰色反應 🔥 <span class="muted" style="font-size:12px">（延伸）</span></h2>
+  <div class="goal">⚠️ 呢個<b>唔喺初中科學科課程</b>（係高中化學），當作趣味延伸實驗</div>
+  <pre id="g5">請用 Canvas 做一個「可愛化學實驗室：焰色測試」互動網頁，全部用 HTML + CSS + JavaScript，唔好用外部 library。
+
+要有：
+1. 一個可愛嘅本生燈（有眼睛），火焰會微微跳動
+2. 一排可以揀嘅元素按鈕：鈉 Na、鉀 K、鈣 Ca、銅 Cu、鍶 Sr、鋇 Ba、鋰 Li
+3. 撳一個元素 → 一條鉑絲沾咗嗰個元素放入火焰 → 火焰變成該元素真實嘅焰色：
+   - 鈉 Na → 金黃色
+   - 鉀 K → 淡紫色
+   - 鈣 Ca → 磚紅色
+   - 銅 Cu → 藍綠色
+   - 鍶 Sr → 深紅色
+   - 鋇 Ba → 黃綠色
+   - 鋰 Li → 洋紅色
+4. 火焰顏色要平滑過渡，並有火焰跳動動畫
+5. 顯示元素名、符號、同焰色嘅中文名稱
+6. 一個「小測驗」模式：隨機出一個焰色，叫學生估係咩元素，答對有星星
+7. 一個「冷知識」區：講下焰色測試用嚟鑑定金屬離子，同埋煙花嘅顏色就係用呢個原理
+
+風格：粉彩色底、火焰用真色、圓潤、粗邊框、emoji（🔥🧪✨）、動畫柔順。</pre>
+  <button class="copy" data-t="g5">複製</button>
+  <div class="expect">
+    <b>應該見到：</b>撳唔同元素，火焰即時轉色。<br>
+    <b>可以追問：</b>「加埋煙花示範」「解釋點解鈉嘅黃色會蓋過其他顏色」。
+  </div>
+</div>
+
+<!-- 求救 -->
+<div class="step">
+  <h2><span class="num">?</span>做唔到點算？</h2>
+  <div class="goal">唔靚、唔啱、冇反應 —— 都係繼續同佢講就得</div>
+
+  <p class="mini">A · 出嚟嘅嘢唔夠可愛</p>
+  <pre id="g6">個效果出咗，但係唔夠可愛。
+請你改成：圓啲、用粉彩色、加柔和陰影同圓角、動畫柔順啲，
+再加少少 emoji。其他嘢唔好改。</pre>
+  <button class="copy" data-t="g6">複製</button>
+
+  <p class="mini">B · 科學原理唔啱</p>
+  <pre id="g7">我覺得個原理有啲唔啱：
+[寫出你覺得錯嘅地方，例如：呢度折射角應該大過入射角]
+請你核對一次，同埋解釋正確嘅科學原理係點，然後改好個模擬。
+如果係初中科學科課程嘅內容，請用課程嘅講法（例如：全內反射嘅條件）。</pre>
+  <button class="copy" data-t="g7">複製</button>
+
+  <p class="mini">C · 完全冇反應 / 一片空白</p>
+  <pre id="g8">個預覽係一片空白，冇任何嘢出。
+請你檢查一次整個程式碼，搵出錯誤並修好。
+如果係因為用咗外部 library 而載入唔到，請改成純 HTML + CSS + JavaScript 重寫。</pre>
+  <button class="copy" data-t="g8">複製</button>
+
+  <div class="expect">
+    <b>做得好嘅話：</b>叫佢「幫我寫低呢個實驗嘅原理說明」—— 順便學埋科學。<br>
+    <b>最終目標：</b>你唔止識用 AI，你仲識<b>判斷 AI 寫嘅科學對唔對</b>。
+  </div>
+</div>
+
+<footer>
+  Gemini Canvas · AI 生成互動科學演示 · 可愛風格<br>
+  對應：科學（中一至中三）課程框架 —— 單元七、十、十四<br>
+  C0713A　AI Vibe Coding　·　2026
+</footer>
+
+</body>
+</html>
